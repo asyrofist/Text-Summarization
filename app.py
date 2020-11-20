@@ -16,3 +16,8 @@ nltk.download('stopwords')
 nltk.download('punkt')
 nltk.download('averaged_perceptron_tagger')
 nltk.download('wordnet')
+
+st.header("Summarization Corpus Brown")
+sentences = brown.sents('ca01')
+list_sentences = [' '.join(sent) for sent in sentences]
+st.write(list_sentences)
