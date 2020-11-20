@@ -1,6 +1,4 @@
 import streamlit as st
-import re
-import string
 import numpy as np
 import matplotlib.pyplot as plt
 import nltk
@@ -71,11 +69,11 @@ col2.write(sentence_ranks)
 st.subheader("Index Sentence Ranking")
 col3, col4 = st.beta_columns([3, 1])
 ranked_sentence_indexes = [item[0] for item in sorted(enumerate(sentence_ranks), key=lambda item: -item[1])]
-col3.write(ranked_sentence_indexes)
-SUMMARY_SIZE = st.slider("Berapa Jumlah Size?", 0, 3, 5)
+col3.dataframe(ranked_sentence_indexes)
+SUMMARY_SIZE = st.slider("Berapa Jumlah Size?", 0, 10, 5)
 # SUMMARY_SIZE = 5
 selected_sentences = sorted(ranked_sentence_indexes[:SUMMARY_SIZE])
-col4.write(selected_sentences)
+col4.dataframe(selected_sentences)
 
 st.subheader("Summary Result")
 summary = itemgetter(*selected_sentences)(sentences)
