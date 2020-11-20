@@ -1,5 +1,1 @@
-matplotlib
-string
 numpy
-nltk
-operator
