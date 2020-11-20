@@ -1,5 +1,4 @@
 matplotlib
-matplotlib-venn
 string
 numpy
 nltk
