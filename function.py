@@ -1,4 +1,5 @@
 import nltk
+import string
 from nltk import pos_tag
 from nltk.tokenize import sent_tokenize, word_tokenize
 from nltk.stem.wordnet import WordNetLemmatizer
