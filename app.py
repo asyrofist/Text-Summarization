@@ -12,3 +12,7 @@ from nltk.cluster.util import cosine_distance
 from operator import itemgetter
 
 nltk.download('brown')
+nltk.download('stopwords')
+nltk.download('punkt')
+nltk.download('averaged_perceptron_tagger')
+nltk.download('wordnet')
