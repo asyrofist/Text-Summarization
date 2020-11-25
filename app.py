@@ -18,6 +18,7 @@ banyak_data = st.sidebar.slider("Berapa Dataset", 0, len(brown.fileids()), 10)
 dataset = st.sidebar.selectbox("Choose Brown Dataset?", brown.fileids()[:banyak_data])
 sentences = brown.sents(dataset)
 list_sentences = [' '.join(sent) for sent in sentences]
+st.header("Summarization Corpus Brown")
 st.dataframe(list_sentences)
 
 # Function
@@ -65,7 +66,6 @@ def build_similarity_matrix(sentences):
         S[i] /= S[i].sum()
     return S
 
-st.header("Summarization Corpus Brown")
 st.sidebar.subheader("Method Parameter")
 genre = st.sidebar.radio("What's your Method",('TextRank', 'Disambiguation'))
 if genre == 'TextRank':
