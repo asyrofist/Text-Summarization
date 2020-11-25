@@ -158,6 +158,6 @@ elif genre == 'Disambiguation':
     closest, _ = pairwise_distances_argmin_min(modelmn.cluster_centers_, vector)
     ordering = sorted(range(n_clusters), key=lambda k: avg[k])
 #     summary = ' '.join([sentences[closest[idx]] for idx in ordering])
-    value_list = [str(sentences[closest[idx]]) for idx in ordering]
+    value_list = [sentences[closest[str(idx)]] for idx in ordering]
     summary = ' '.join(value_list)
     st.text(summary)
