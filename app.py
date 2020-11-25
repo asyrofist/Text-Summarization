@@ -104,8 +104,8 @@ if genre == 'TextRank':
     col3, col4 = st.beta_columns([3, 1])
     ranked_sentence_indexes = [item[0] for item in sorted(enumerate(sentence_ranks), key=lambda item: -item[1])]
     col3.dataframe(ranked_sentence_indexes)
-    SUMMARY_SIZE = st.slider("Berapa Jumlah Size?", 0, 10, 5)
-    # SUMMARY_SIZE = 5
+    st.sidebar.subheader("Summary Parameter")
+    SUMMARY_SIZE = st.sidebar.slider("Berapa Jumlah Size?", 0, 10, 5)
     selected_sentences = sorted(ranked_sentence_indexes[:SUMMARY_SIZE])
     col4.dataframe(selected_sentences)
 
@@ -127,25 +127,9 @@ elif genre == 'Disambiguation':
     col1.write(hasil_disambiguation)
     sentence_ranks = pagerank(hasil_disambiguation)
     col2.write(sentence_ranks)
-
-    # Load Word Sense Disambiguation 
-    st.subheader("Index Sentence Ranking")
-    col3, col4 = st.beta_columns([3, 1])
-    ranked_sentence_indexes = [item[0] for item in sorted(enumerate(sentence_ranks), key=lambda item: -item[1])]
-    col3.dataframe(ranked_sentence_indexes)
-    SUMMARY_SIZE = st.slider("Berapa Jumlah Size?", 1, 10, 5)
-    # SUMMARY_SIZE = 5
-    selected_sentences = sorted(ranked_sentence_indexes[:SUMMARY_SIZE])
-    col4.dataframe(selected_sentences)
-
-    st.subheader("Summary Result")
-#     summary = itemgetter(*selected_sentences)(sentences)
-#     for sent in summary:
-#         st.write(' '.join(sent))
     
-#     data  = sentences
-#     summary_mn(SUMMARY_SIZE,vec(data,'wu2v'))
-
+    st.sidebar.subheader("Ranking Parameter")
+    SUMMARY_SIZE = st.sidebar.slider("Berapa Jumlah Size?", 1, 10, 5)
     avg = []
     n = SUMMARY_SIZE
     vector = [disambiguation_df[i] for i in range(len(sentences))]
@@ -161,6 +145,8 @@ elif genre == 'Disambiguation':
     col5.dataframe(closest)
     col6.dataframe(ordering)
 #     summary = ' '.join([sentences[closest[idx]] for idx in ordering])
+
+    st.subheader("Summary Result")
     for idx in ordering:
         summary = sentences[ordering[idx]]
         st.write(' '.join(summary))        
