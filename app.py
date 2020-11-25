@@ -139,7 +139,7 @@ elif genre == 'Disambiguation':
     closest, _ = pairwise_distances_argmin_min(modelmn.cluster_centers_, vector)
     ordering = sorted(range(n_clusters), key=lambda k: avg[k])
     st.subheader("Closest & Ordering Cluster")
-    col5, col6 = st.beta_columns([2, 2])
+    col5, col6 = st.beta_columns([1, 1])
     col5.dataframe(closest)
     col6.dataframe(ordering)
 
