@@ -160,4 +160,4 @@ elif genre == 'Disambiguation':
 #     summary = ' '.join([sentences[closest[idx]] for idx in ordering])
     summary = [str(sentences[closest[idx]])]
     for idx in ordering:
-      st.write(' '.join(summary)) 
+      st.write(' '.join(str(summary))) 
