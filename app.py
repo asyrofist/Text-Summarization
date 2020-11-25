@@ -5,11 +5,13 @@ import matplotlib.pyplot as plt
 import nltk
 from nltk.corpus import brown
 from nltk.cluster.util import cosine_distance
+from nltk.tokenize import TreebankWordTokenizer
 from operator import itemgetter
 from function import TextCleaner
 from pywsd.cosine import cosine_similarity
 from sklearn.cluster import MiniBatchKMeans
 from sklearn.metrics import pairwise_distances_argmin_min
+
 
 nltk.download('brown')
 
@@ -65,6 +67,18 @@ def build_similarity_matrix(sentences):
     for i in range(len(S)):
         S[i] /= S[i].sum()
     return S
+
+# word embedding
+def word_embedding(sen):
+    embeded = 0
+    tokenizer_wrd = TreebankWordTokenizer()
+    word_list = tokenizer_wrd.tokenize(sen)
+    for i in range(len(word_list)):
+        if ((word_list[i] in word2vec_model.index2word) == True):
+            embeded = embeded + word2vec_model.get_vector(word_list[i])
+        else:
+            embeded = embeded + unknown_embedd
+    return embeded
 
 st.sidebar.subheader("Method Parameter")
 genre = st.sidebar.radio("What's your Method",('TextRank', 'Disambiguation', 'wordembed'))
@@ -130,5 +144,38 @@ elif genre == 'Disambiguation':
 
 
 elif genre == 'wordembed':
-    st.write('done')
+    # Load word2vec pretrained
+    st.sidebar.subheader("Word2vec Parameter")
+    size_value = st.sidebar.slider("Berapa size?", 0, 1000, 100)
+    mode_value = st.sidebar.selectbox("Pilih Mode", [1, 0])
+    windows_value = st.sidebar.slider("WIndows Size?", 0, 10, 3)
+    iteration_value = st.sidebar.slider("iteration size?", 0, 100, 10) 
+    word2vec_model = Word2Vec(sentences = sentences, size = size_value, sg = mode_value, window = window_value, min_count = 1, iter = iteration_value, workers = Pool()._processes)
+    word2vec_model.init_sims(replace = True)
+    embedd_vectors = word2vec_model.vectors
+    unknown_embedd = np.zeros(300)
+    
+    st.sidebar.subheader("Cluster Parameter")
+    word_embedding(sentences)
+    SUMMARY_SIZE = st.sidebar.slider("Berapa Jumlah Cluster?", 1, len(word_embedding(sentences)), 44)
+    avg = []
+    n = SUMMARY_SIZE
+    vector = [disambiguation_df[i] for i in range(len(sentences))]
+    n_clusters = len(sentences)//n
+    modelmn = MiniBatchKMeans(n_clusters=n_clusters) #minibatch
+    modelmn = modelmn.fit(vector)
+    for j in range(n_clusters):
+        idx = np.where(modelmn.labels_ == j)[0]
+        avg.append(np.mean(idx))
+    closest, _ = pairwise_distances_argmin_min(modelmn.cluster_centers_, vector)
+    ordering = sorted(range(n_clusters), key=lambda k: avg[k])
+    st.subheader("Closest & Ordering Cluster")
+    col5, col6 = st.beta_columns([1, 1])
+    col5.dataframe(closest)
+    col6.dataframe(ordering)
+
+    st.subheader("Summary Result")
+    summary = ' '.join([list_sentences[closest[idx]] for idx in ordering])
+    st.write(summary)
+    
     
