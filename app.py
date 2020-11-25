@@ -76,6 +76,18 @@ def build_lexicon(corpus):
         lexicon.update([word for word in doc])
     return lexicon
 
+# word embedding
+def word_embedding(sen):
+    embeded = 0
+    vocabulary = build_lexicon(sentences)
+    word_list = [word for word in vocabulary]
+    for i in range(len(word_list)):
+        if ((word_list[i] in word2vec_model.index2word) == True):
+            embeded = embeded + word2vec_model.get_vector(word_list[i])
+        else:
+            embeded = embeded + unknown_embedd
+    return embeded
+
 st.sidebar.subheader("Method Parameter")
 genre = st.sidebar.radio("What's your Method",('TextRank', 'Disambiguation', 'wordembed'))
 if genre == 'TextRank':
@@ -150,9 +162,7 @@ elif genre == 'wordembed':
     word2vec_model.init_sims(replace = True)
 #     embedd_vectors = word2vec_model.vectors
     unknown_embedd = np.zeros(300)
-    vocabulary = build_lexicon(sentences)
-    kata = [word for word in vocabulary]
-    hasil = word2vec_model.most_similar(kata[0])
+    hasil = word_embedding(sentences)
     st.write(hasil)
     
 #     st.sidebar.subheader("Cluster Parameter")
