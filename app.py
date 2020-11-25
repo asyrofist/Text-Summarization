@@ -117,16 +117,13 @@ if genre == 'TextRank':
 elif genre == 'Disambiguation':
     st.subheader("Sentence Ranking based on Disamiguation")
     # Load Word Sense Disambiguation 
-    col1, col2 = st.beta_columns([3, 1])
     disambiguation_df = []
     for angka in range(0, len(list_sentences)):
         a = [cosine_similarity(list_sentences[angka], list_sentences[num]) for num in range(0, len(list_sentences))]
         disambiguation_df.append(a)      
 
     hasil_disambiguation = pd.DataFrame(disambiguation_df)
-    col1.write(hasil_disambiguation)
-    sentence_ranks = pagerank(hasil_disambiguation)
-    col2.write(sentence_ranks)
+    st.write(hasil_disambiguation)
     
     st.sidebar.subheader("Ranking Parameter")
     SUMMARY_SIZE = st.sidebar.slider("Berapa Jumlah Size?", 1, 10, 5)
