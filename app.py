@@ -161,6 +161,7 @@ elif genre == 'wordembed':
     word2vec_model = Word2Vec(sentences = sentences, size = size_value, sg = mode_value, window = window_value, min_count = 1, iter = iteration_value, workers = Pool()._processes)
     word2vec_model.init_sims(replace = True)
     embedd_vectors = word2vec_model.wv.vectors
+#     st.write(embedd_vectors)
     unknown_embedd = np.zeros(300)
     
     st.sidebar.subheader("Cluster Parameter")
@@ -169,6 +170,7 @@ elif genre == 'wordembed':
     avg = []
     n = SUMMARY_SIZE
     vector = [word_embedding(sentences[i]) for i in range(len(sentences))]
+    st.write(vector)
 #     vector = [embedd_vectors]
     n_clusters = len(sentences)//n
     modelmn = MiniBatchKMeans(n_clusters=n_clusters) #minibatch
