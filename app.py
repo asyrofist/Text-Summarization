@@ -153,7 +153,7 @@ elif genre == 'wordembed':
     iteration_value = st.sidebar.slider("iteration size?", 0, 100, 10) 
     word2vec_model = Word2Vec(sentences = sentences, size = size_value, sg = mode_value, window = window_value, min_count = 1, iter = iteration_value, workers = Pool()._processes)
     word2vec_model.init_sims(replace = True)
-    embedd_vectors = word2vec_model.vectors
+#     embedd_vectors = word2vec_model.vectors
     unknown_embedd = np.zeros(300)
     
     st.sidebar.subheader("Cluster Parameter")
