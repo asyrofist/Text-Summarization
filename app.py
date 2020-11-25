@@ -144,5 +144,5 @@ elif genre == 'Disambiguation':
 #     for sent in summary:
 #         st.write(' '.join(sent))
     
-    data  = list_sentences
+    data  = sentences
     summary_mn(SUMMARY_SIZE,vec(data,'wu2v'))
