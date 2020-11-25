@@ -65,10 +65,9 @@ def build_similarity_matrix(sentences):
 
 # vector 
 index = []
-# def vec(data2,mode):
-def vec(sentences,mode):
-#     data2 = data2.lower()
-#     sentences = nltk.sent_tokenize(data2)
+def vec(data2,mode):
+    data2 = data2.lower()
+    sentences = nltk.sent_tokenize(data2)
     vec = []
     if (mode == 'wu2v'):
         for i in range(len(sentences)):
@@ -146,8 +145,9 @@ elif genre == 'Disambiguation':
     
 #     data  = sentences
 #     summary_mn(SUMMARY_SIZE,vec(data,'wu2v'))
+
     avg = []
-    n_clusters = len(sentences)//n
+    n_clusters = len(sentences)//SUMMARY_SIZE
     modelmn = MiniBatchKMeans(n_clusters=n_clusters) #minibatch
     modelmn = modelmn.fit([disambiguation_df[i] for i in range(len(sentences))])
     for j in range(n_clusters):
