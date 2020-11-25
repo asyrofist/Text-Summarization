@@ -63,32 +63,6 @@ def build_similarity_matrix(sentences):
         S[i] /= S[i].sum()
     return S
 
-# vector 
-index = []
-def vec(data2,mode):
-    data2 = data2.lower()
-    sentences = nltk.sent_tokenize(data2)
-    vec = []
-    if (mode == 'wu2v'):
-        for i in range(len(sentences)):
-            vec.append(disambiguation_df[i])
-            index.append(i)
-    return vec
-
-# Summary based on minibatch
-def summary_mn(n,vector):
-    avg = []
-    n_clusters = len(sentences)//n
-    modelmn = MiniBatchKMeans(n_clusters=n_clusters) #minibatch
-    modelmn = modelmn.fit(vector)
-    for j in range(n_clusters):
-        idx = np.where(modelmn.labels_ == j)[0]
-        avg.append(np.mean(idx))
-    closest, _ = pairwise_distances_argmin_min(modelmn.cluster_centers_, vector)
-    ordering = sorted(range(n_clusters), key=lambda k: avg[k])
-    summary = ' '.join([sentences[closest[idx]] for idx in ordering])
-    return summary
-
 st.sidebar.subheader("Method Parameter")
 genre = st.sidebar.radio("What's your Method",('TextRank', 'Disambiguation'))
 if genre == 'TextRank':
@@ -126,7 +100,7 @@ elif genre == 'Disambiguation':
     st.write(hasil_disambiguation)
     
     st.sidebar.subheader("Ranking Parameter")
-    SUMMARY_SIZE = st.sidebar.slider("Berapa Jumlah Size?", 1, 10, 5)
+    SUMMARY_SIZE = st.sidebar.slider("Berapa Jumlah Cluster?", 1, 10, 5)
     avg = []
     n = SUMMARY_SIZE
     vector = [disambiguation_df[i] for i in range(len(sentences))]
