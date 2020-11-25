@@ -161,33 +161,29 @@ elif genre == 'wordembed':
     word2vec_model = Word2Vec(sentences = sentences, size = size_value, sg = mode_value, window = window_value, min_count = 1, iter = iteration_value, workers = Pool()._processes)
     word2vec_model.init_sims(replace = True)
     embedd_vectors = word2vec_model.wv.vectors
-    st.write(embedd_vectors)
-#     embedd_vectors = word2vec_model.vectors
     unknown_embedd = np.zeros(300)
-    hasil = word_embedding(sentences)
-    st.write(hasil)
     
-#     st.sidebar.subheader("Cluster Parameter")
-#     word_embedding(sentences)
-#     SUMMARY_SIZE = st.sidebar.slider("Berapa Jumlah Cluster?", 1, len(word_embedding(sentences)), 44)
-#     avg = []
-#     n = SUMMARY_SIZE
-#     vector = [disambiguation_df[i] for i in range(len(sentences))]
-#     n_clusters = len(sentences)//n
-#     modelmn = MiniBatchKMeans(n_clusters=n_clusters) #minibatch
-#     modelmn = modelmn.fit(vector)
-#     for j in range(n_clusters):
-#         idx = np.where(modelmn.labels_ == j)[0]
-#         avg.append(np.mean(idx))
-#     closest, _ = pairwise_distances_argmin_min(modelmn.cluster_centers_, vector)
-#     ordering = sorted(range(n_clusters), key=lambda k: avg[k])
-#     st.subheader("Closest & Ordering Cluster")
-#     col5, col6 = st.beta_columns([1, 1])
-#     col5.dataframe(closest)
-#     col6.dataframe(ordering)
+    st.sidebar.subheader("Cluster Parameter")
+    word_embedding(sentences)
+    SUMMARY_SIZE = st.sidebar.slider("Berapa Jumlah Cluster?", 1, len(word_embedding(sentences)), 44)
+    avg = []
+    n = SUMMARY_SIZE
+    vector = [disambiguation_df[i] for i in range(len(sentences))]
+    n_clusters = len(sentences)//n
+    modelmn = MiniBatchKMeans(n_clusters=n_clusters) #minibatch
+    modelmn = modelmn.fit(vector)
+    for j in range(n_clusters):
+        idx = np.where(modelmn.labels_ == j)[0]
+        avg.append(np.mean(idx))
+    closest, _ = pairwise_distances_argmin_min(modelmn.cluster_centers_, vector)
+    ordering = sorted(range(n_clusters), key=lambda k: avg[k])
+    st.subheader("Closest & Ordering Cluster")
+    col5, col6 = st.beta_columns([1, 1])
+    col5.dataframe(closest)
+    col6.dataframe(ordering)
 
-#     st.subheader("Summary Result")
-#     summary = ' '.join([list_sentences[closest[idx]] for idx in ordering])
-#     st.write(summary)
+    st.subheader("Summary Result")
+    summary = ' '.join([list_sentences[closest[idx]] for idx in ordering])
+    st.write(summary)
     
     
