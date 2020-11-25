@@ -144,5 +144,16 @@ elif genre == 'Disambiguation':
 #     for sent in summary:
 #         st.write(' '.join(sent))
     
-    data  = sentences
-    summary_mn(SUMMARY_SIZE,vec(data,'wu2v'))
+#     data  = sentences
+#     summary_mn(SUMMARY_SIZE,vec(data,'wu2v'))
+    avg = []
+    n_clusters = len(sentences)//n
+    modelmn = MiniBatchKMeans(n_clusters=n_clusters) #minibatch
+    modelmn = modelmn.fit([disambiguation_df[i] for i in range(len(sentences))])
+    for j in range(n_clusters):
+        idx = np.where(modelmn.labels_ == j)[0]
+        avg.append(np.mean(idx))
+    closest, _ = pairwise_distances_argmin_min(modelmn.cluster_centers_, vector)
+    ordering = sorted(range(n_clusters), key=lambda k: avg[k])
+    summary = ' '.join([sentences[closest[idx]] for idx in ordering])
+
