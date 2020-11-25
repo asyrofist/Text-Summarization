@@ -152,7 +152,7 @@ elif genre == 'wordembed':
     unknown_embedd = np.zeros(300)
     vocabulary = build_lexicon(sentences)
     kata = [word for word in vocabulary]
-    hasil = model.most_similar(kata[0])
+    hasil = word2vec_model.most_similar(kata[0])
     st.write(hasil)
     
 #     st.sidebar.subheader("Cluster Parameter")
