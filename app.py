@@ -100,7 +100,7 @@ elif genre == 'Disambiguation':
     st.write(hasil_disambiguation)
     
     st.sidebar.subheader("Cluster Parameter")
-    SUMMARY_SIZE = st.sidebar.slider("Berapa Jumlah Cluster?", 1, 10, 5)
+    SUMMARY_SIZE = st.sidebar.slider("Berapa Jumlah Cluster?", 1, 10, len(disambiguation_df))
     avg = []
     n = SUMMARY_SIZE
     vector = [disambiguation_df[i] for i in range(len(sentences))]
