@@ -65,7 +65,7 @@ def build_similarity_matrix(sentences):
 # vector 
 index = []
 def vec(data2,mode):
-    data2 = data2.lower()
+#     data2 = data2.lower()
     sentences = nltk.sent_tokenize(data2)
     vec = []
     if (mode == 'wu2v'):
