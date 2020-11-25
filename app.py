@@ -193,7 +193,9 @@ elif genre == 'wordembedRank':
     
     # load model
     col1, col2 = st.beta_columns([3, 1])
-    col1.write(embedd_vectors)
+    vector = [word_embedding(sentences[i]) for i in range(len(sentences))]
+    st.subheader("Vector Word Embedding")
+    col1.dataframe(vector)
     sentence_ranks = pagerank(embedd_vectors)
     col2.write(sentence_ranks)
     
