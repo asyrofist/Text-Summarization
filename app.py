@@ -67,7 +67,7 @@ def build_similarity_matrix(sentences):
     return S
 
 st.sidebar.subheader("Method Parameter")
-genre = st.sidebar.radio("What's your Method",('TextRank', 'Disambiguation'))
+genre = st.sidebar.radio("What's your Method",('TextRank', 'Disambiguation', 'wordembed'))
 if genre == 'TextRank':
     st.subheader("Sentence Ranking")
     col1, col2 = st.beta_columns([3, 1])
@@ -123,7 +123,12 @@ elif genre == 'Disambiguation':
     st.subheader("Summary Result")
     summary = ' '.join([list_sentences[closest[idx]] for idx in ordering])
     st.write(summary)
-
+    
 #     for idx in ordering:
 #         summary = sentences[ordering[idx]]
 #         st.write(' '.join(summary))        
+
+
+elif genre == 'wordembed':
+    st.write('done')
+    
