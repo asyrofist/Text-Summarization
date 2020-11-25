@@ -61,37 +61,56 @@ def build_similarity_matrix(sentences):
         S[i] /= S[i].sum()
     return S
   
-# st.subheader("Sentence Ranking")
-# col1, col2 = st.beta_columns([3, 1])
-# S = build_similarity_matrix(sentences)
-# col1.write(S)
-# sentence_ranks = pagerank(S)
-# col2.write(sentence_ranks)
+    
+genre = st.radio("What's your Method",('Previous', 'Disambiguation'))
+if genre == 'Previous':
+    st.subheader("Sentence Ranking")
+    col1, col2 = st.beta_columns([3, 1])
+    S = build_similarity_matrix(sentences)
+    col1.write(S)
+    sentence_ranks = pagerank(S)
+    col2.write(sentence_ranks)
+    
+    # Load Word Sense Disambiguation 
+    st.subheader("Index Sentence Ranking")
+    col3, col4 = st.beta_columns([3, 1])
+    ranked_sentence_indexes = [item[0] for item in sorted(enumerate(sentence_ranks), key=lambda item: -item[1])]
+    col3.dataframe(ranked_sentence_indexes)
+    SUMMARY_SIZE = st.slider("Berapa Jumlah Size?", 0, 10, 5)
+    # SUMMARY_SIZE = 5
+    selected_sentences = sorted(ranked_sentence_indexes[:SUMMARY_SIZE])
+    col4.dataframe(selected_sentences)
 
-st.subheader("Sentence Ranking based on Disamiguation")
-# Load Word Sense Disambiguation 
-col1, col2 = st.beta_columns([3, 1])
-disambiguation_df = []
-for angka in range(0, len(list_sentences)):
-    a = [cosine_similarity(list_sentences[angka], list_sentences[num]) for num in range(0, len(list_sentences))]
-    disambiguation_df.append(a)      
+    st.subheader("Summary Result")
+    summary = itemgetter(*selected_sentences)(sentences)
+    for sent in summary:
+        st.write(' '.join(sent))
 
-hasil_disambiguation = pd.DataFrame(disambiguation_df)
-col1.write(hasil_disambiguation)
-sentence_ranks = pagerank(hasil_disambiguation)
-col2.write(sentence_ranks)
+elif genre == 'Disambiguation':
+    st.subheader("Sentence Ranking based on Disamiguation")
+    # Load Word Sense Disambiguation 
+    col1, col2 = st.beta_columns([3, 1])
+    disambiguation_df = []
+    for angka in range(0, len(list_sentences)):
+        a = [cosine_similarity(list_sentences[angka], list_sentences[num]) for num in range(0, len(list_sentences))]
+        disambiguation_df.append(a)      
 
-# Load Word Sense Disambiguation 
-st.subheader("Index Sentence Ranking")
-col3, col4 = st.beta_columns([3, 1])
-ranked_sentence_indexes = [item[0] for item in sorted(enumerate(sentence_ranks), key=lambda item: -item[1])]
-col3.dataframe(ranked_sentence_indexes)
-SUMMARY_SIZE = st.slider("Berapa Jumlah Size?", 0, 10, 5)
-# SUMMARY_SIZE = 5
-selected_sentences = sorted(ranked_sentence_indexes[:SUMMARY_SIZE])
-col4.dataframe(selected_sentences)
+    hasil_disambiguation = pd.DataFrame(disambiguation_df)
+    col1.write(hasil_disambiguation)
+    sentence_ranks = pagerank(hasil_disambiguation)
+    col2.write(sentence_ranks)
 
-st.subheader("Summary Result")
-summary = itemgetter(*selected_sentences)(sentences)
-for sent in summary:
-    st.write(' '.join(sent))
+    # Load Word Sense Disambiguation 
+    st.subheader("Index Sentence Ranking")
+    col3, col4 = st.beta_columns([3, 1])
+    ranked_sentence_indexes = [item[0] for item in sorted(enumerate(sentence_ranks), key=lambda item: -item[1])]
+    col3.dataframe(ranked_sentence_indexes)
+    SUMMARY_SIZE = st.slider("Berapa Jumlah Size?", 0, 10, 5)
+    # SUMMARY_SIZE = 5
+    selected_sentences = sorted(ranked_sentence_indexes[:SUMMARY_SIZE])
+    col4.dataframe(selected_sentences)
+
+    st.subheader("Summary Result")
+    summary = itemgetter(*selected_sentences)(sentences)
+    for sent in summary:
+        st.write(' '.join(sent))
