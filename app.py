@@ -138,9 +138,9 @@ elif genre == 'Disambiguation':
     col4.dataframe(selected_sentences)
 
     st.subheader("Summary Result")
-    summary = itemgetter(*selected_sentences)(sentences)
-    for sent in summary:
-        st.write(' '.join(sent))
+#     summary = itemgetter(*selected_sentences)(sentences)
+#     for sent in summary:
+#         st.write(' '.join(sent))
     
-    data  = list_sentences
+    data  = list_sentences.lower()
     summary_mn(SUMMARY_SIZE,vec(data,'wu2v'))
