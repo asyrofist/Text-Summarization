@@ -61,23 +61,25 @@ def build_similarity_matrix(sentences):
         S[i] /= S[i].sum()
     return S
   
-st.subheader("Sentence Ranking")
-col1, col2 = st.beta_columns([3, 1])
-S = build_similarity_matrix(sentences)
-col1.write(S)
-sentence_ranks = pagerank(S)
-col2.write(sentence_ranks)
+# st.subheader("Sentence Ranking")
+# col1, col2 = st.beta_columns([3, 1])
+# S = build_similarity_matrix(sentences)
+# col1.write(S)
+# sentence_ranks = pagerank(S)
+# col2.write(sentence_ranks)
 
-st.subheader("disamiguation")
+st.subheader("Sentence Ranking based on Disamiguation")
 # Load Word Sense Disambiguation 
-from pywsd.cosine import cosine_similarity
+col1, col2 = st.beta_columns([3, 1])
 disambiguation_df = []
 for angka in range(0, len(list_sentences)):
     a = [cosine_similarity(list_sentences[angka], list_sentences[num]) for num in range(0, len(list_sentences))]
     disambiguation_df.append(a)      
 
 hasil_disambiguation = pd.DataFrame(disambiguation_df)
-st.write(hasil_disambiguation)
+col1.write(hasil_disambiguation)
+sentence_ranks = pagerank(hasil_disambiguation)
+col2.write(sentence_ranks)
 
 ## Load Word Sense Disambiguation 
 # st.subheader("Index Sentence Ranking")
