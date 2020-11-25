@@ -4,3 +4,4 @@ nltk
 streamlit
 pywsd
 sklearn
+gensim
