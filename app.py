@@ -89,7 +89,7 @@ def word_embedding(sen):
     return embeded
 
 st.sidebar.subheader("Method Parameter")
-genre = st.sidebar.radio("What's your Method",('TextRank', 'DisambiguationRank', 'DisambiguationCluster', 'wordembedRank', 'wordembedCluster'))
+genre = st.sidebar.radio("What's your Method",('TextRank', 'DisambiguationRank', 'DisambiguationCluster', 'wordembedCluster'))
 if genre == 'TextRank':
     st.subheader("Sentence Ranking")
     col1, col2 = st.beta_columns([3, 1])
@@ -178,41 +178,6 @@ elif genre == 'DisambiguationCluster':
 #     for idx in ordering:
 #         summary = sentences[ordering[idx]]
 #         st.write(' '.join(summary))        
-
-elif genre == 'wordembedRank':
-    st.subheader("Sentence Ranking")
-    # Load word2vec pretrained
-    st.sidebar.subheader("Word2vec Parameter")
-    size_value = st.sidebar.slider("Berapa size?", 0, 200, len(sentences))
-    mode_value = st.sidebar.selectbox("Pilih Mode", [1, 0])
-    window_value = st.sidebar.slider("WIndows Size?", 0, 10, 3)
-    iteration_value = st.sidebar.slider("iteration size?", 0, 100, 10) 
-    word2vec_model = Word2Vec(sentences = sentences, size = size_value, sg = mode_value, window = window_value, min_count = 1, iter = iteration_value, workers = Pool()._processes)
-    word2vec_model.init_sims(replace = True)
-    embedd_vectors = word2vec_model.wv.vectors
-    
-    # load model
-    col1, col2 = st.beta_columns([3, 1])
-    vector = [word_embedding(sentences[i]) for i in range(len(sentences))]
-    st.subheader("Vector Word Embedding")
-    col1.dataframe(vector)
-    sentence_ranks = pagerank(word_embedding(sentences))
-    col2.write(sentence_ranks)
-    
-#     # Load Word Sense Disambiguation 
-#     st.subheader("Index Sentence Ranking")
-#     col3, col4 = st.beta_columns([3, 1])
-#     ranked_sentence_indexes = [item[0] for item in sorted(enumerate(sentence_ranks), key=lambda item: -item[1])]
-#     col3.dataframe(ranked_sentence_indexes)
-#     st.sidebar.subheader("Summary Parameter")
-#     SUMMARY_SIZE = st.sidebar.slider("Berapa Jumlah Size?", 0, 10, 5)
-#     selected_sentences = sorted(ranked_sentence_indexes[:SUMMARY_SIZE])
-#     col4.dataframe(selected_sentences)
-
-#     st.subheader("Summary Result")
-#     summary = itemgetter(*selected_sentences)(sentences)
-#     for sent in summary:
-#         st.write(' '.join(sent))
         
 elif genre == 'wordembedCluster':
     # Load word2vec pretrained
@@ -228,7 +193,7 @@ elif genre == 'wordembedCluster':
     unknown_embedd = np.zeros(300)
     
     st.sidebar.subheader("Cluster Parameter")
-    word_embedding(sentences)
+#     word_embedding(sentences)
     SUMMARY_SIZE = st.sidebar.slider("Berapa Jumlah Cluster?", 1, len(word_embedding(sentences)), 44)
     avg = []
     n = SUMMARY_SIZE
