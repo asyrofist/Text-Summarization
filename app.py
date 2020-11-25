@@ -45,8 +45,8 @@ def sentence_similarity(sent1, sent2):
     for w in sent2:
         vector2[all_words.index(w)] += 1
     
-    return 1 - cosine_distance(vector1, vector2)
-#     return cosine_similarity(vector1, vector2)
+#     return 1 - cosine_distance(vector1, vector2)
+    return 1 - cosine_similarity(vector1, vector2)
 
 def build_similarity_matrix(sentences):
     S = np.zeros((len(sentences), len(sentences)))
