@@ -3,3 +3,4 @@ matplotlib
 nltk
 streamlit
 pywsd
+sklearn
