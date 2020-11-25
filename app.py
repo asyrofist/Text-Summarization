@@ -170,7 +170,8 @@ elif genre == 'wordembed':
     avg = []
     n = SUMMARY_SIZE
     vector = [word_embedding(sentences[i]) for i in range(len(sentences))]
-    st.write(vector)
+    st.sidebar.subheader("Vector Word Embedding")
+    st.dataframe(vector)
 #     vector = [embedd_vectors]
     n_clusters = len(sentences)//n
     modelmn = MiniBatchKMeans(n_clusters=n_clusters) #minibatch
