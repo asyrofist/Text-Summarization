@@ -170,7 +170,7 @@ elif genre == 'wordembed':
     avg = []
     n = SUMMARY_SIZE
     vector = [word_embedding(sentences[i]) for i in range(len(sentences))]
-    st.sidebar.subheader("Vector Word Embedding")
+    st.subheader("Vector Word Embedding")
     st.dataframe(vector)
 #     vector = [embedd_vectors]
     n_clusters = len(sentences)//n
