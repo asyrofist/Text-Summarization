@@ -15,8 +15,8 @@ nltk.download('brown')
 
 st.header("Summarization Corpus Brown")
 st.subheader("Dataset parameter")
-st.sidebar.slider("Berapa Dataset", 0, len(brown.fileids()), 10)
-dataset = st.sidebar.selectbox("Choose Brown Dataset?", brown.fileids())
+banyak_data = st.sidebar.slider("Berapa Dataset", 0, len(brown.fileids()), 10)
+dataset = st.sidebar.selectbox("Choose Brown Dataset?", brown.fileids()[:len(banyak_data)])
 sentences = brown.sents(dataset)
 list_sentences = [' '.join(sent) for sent in sentences]
 st.dataframe(list_sentences)
