@@ -168,7 +168,7 @@ elif genre == 'wordembed':
     SUMMARY_SIZE = st.sidebar.slider("Berapa Jumlah Cluster?", 1, len(word_embedding(sentences)), 44)
     avg = []
     n = SUMMARY_SIZE
-    vector = [disambiguation_df[i] for i in range(len(sentences))]
+    vector = [word_embedding(sentences)[i] for i in range(len(sentences))]
     n_clusters = len(sentences)//n
     modelmn = MiniBatchKMeans(n_clusters=n_clusters) #minibatch
     modelmn = modelmn.fit(vector)
