@@ -117,9 +117,10 @@ elif genre == 'Disambiguation':
     col5.dataframe(closest)
     col6.dataframe(ordering)
 
-    #     summary = ' '.join([sentences[closest[idx]] for idx in ordering])
     st.subheader("Summary Result")
-    for idx in ordering:
+    summary = ' '.join([list_sentences[closest[idx]] for idx in ordering])
+    st.write(summary)
+
+#     for idx in ordering:
 #         summary = sentences[ordering[idx]]
-        summary = list_sentences[ordering[idx]]
-        st.write(' '.join(summary))        
+#         st.write(' '.join(summary))        
