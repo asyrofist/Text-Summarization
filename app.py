@@ -196,7 +196,7 @@ elif genre == 'wordembedRank':
     vector = [word_embedding(sentences[i]) for i in range(len(sentences))]
     st.subheader("Vector Word Embedding")
     col1.dataframe(vector)
-    sentence_ranks = pagerank(word_embedding(sentences))
+    sentence_ranks = pagerank(vector)
     col2.write(sentence_ranks)
     
 #     # Load Word Sense Disambiguation 
