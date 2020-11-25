@@ -71,8 +71,8 @@ st.subheader("disamiguation")
 # Load Word Sense Disambiguation 
 from pywsd.cosine import cosine_similarity
 disambiguation_df = []
-for angka in range(0, len(sentences)):
-    a = [cosine_similarity(sentences[angka], sentences[num]) for num in range(0, len(sentences))]
+for angka in range(0, len(list_sentences)):
+    a = [cosine_similarity(list_sentences[angka], list_sentences[num]) for num in range(0, len(list_sentences))]
     disambiguation_df.append(a)      
 
 hasil_disambiguation = pd.DataFrame(disambiguation_df)
