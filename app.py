@@ -120,5 +120,6 @@ elif genre == 'Disambiguation':
     #     summary = ' '.join([sentences[closest[idx]] for idx in ordering])
     st.subheader("Summary Result")
     for idx in ordering:
-        summary = sentences[ordering[idx]]
+#         summary = sentences[ordering[idx]]
+        summary = list_sentences[ordering[idx]]
         st.write(' '.join(summary))        
