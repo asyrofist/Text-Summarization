@@ -82,8 +82,8 @@ def word_embedding(sen):
     vocabulary = build_lexicon(sentences)
     word_list = [word for word in vocabulary]
     for i in range(len(word_list)):
-        if ((word_list[i] in word2vec_model.index2word) == True):
-            embeded = embeded + word2vec_model.get_vector(word_list[i])
+        if ((word_list[i] in word2vec_model.wv.index2word) == True):
+            embeded = embeded + word2vec_model.wv.get_vector(word_list[i])
         else:
             embeded = embeded + unknown_embedd
     return embeded
