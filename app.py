@@ -138,9 +138,10 @@ elif genre == 'Disambiguation':
         avg.append(np.mean(idx))
     closest, _ = pairwise_distances_argmin_min(modelmn.cluster_centers_, vector)
     ordering = sorted(range(n_clusters), key=lambda k: avg[k])
+    st.subheader("Closest & Ordering Cluster")
     col5, col6 = st.beta_columns([2, 2])
-    col5.dataframe(closest, column = ['closest'])
-    col6.dataframe(ordering, column = ['ordering'])
+    col5.dataframe(closest)
+    col6.dataframe(ordering)
 
     #     summary = ' '.join([sentences[closest[idx]] for idx in ordering])
     st.subheader("Summary Result")
