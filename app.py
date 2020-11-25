@@ -61,8 +61,8 @@ def build_similarity_matrix(sentences):
         S[i] /= S[i].sum()
     return S
   
-    
-genre = st.radio("What's your Method",('Previous', 'Disambiguation'))
+st.sidebar.subheader("Method Parameter")
+genre = st.sidebar.radio("What's your Method",('Previous', 'Disambiguation'))
 if genre == 'Previous':
     st.subheader("Sentence Ranking")
     col1, col2 = st.beta_columns([3, 1])
