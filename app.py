@@ -45,8 +45,9 @@ def sentence_similarity(sent1, sent2):
     for w in sent2:
         vector2[all_words.index(w)] += 1
     
-    return 1 - cosine_distance(vector1, vector2)
-  
+#     return 1 - cosine_distance(vector1, vector2)
+    return cosine_similarity(vector1, vector2)
+
 def build_similarity_matrix(sentences):
     S = np.zeros((len(sentences), len(sentences)))
     for i in range(len(sentences)):
@@ -61,22 +62,13 @@ def build_similarity_matrix(sentences):
     return S
   
 st.subheader("Sentence Ranking")
-# col1, col2 = st.beta_columns([3, 1])
-# S = build_similarity_matrix(sentences)
-# col1.write(S)
-# sentence_ranks = pagerank(S)
-# col2.write(sentence_ranks)
-# Load Word Sense Disambiguation 
-st.write(sentences)
-# disambiguation_df = []
-# for angka in range(0, len(sentences)):
-#     a = [cosine_similarity(sentences[angka], sentences[num]) for num in range(0, len(sentences))]
-#     disambiguation_df.append(a)      
-# hasil_disambiguation = pd.DataFrame(disambiguation_df)
-# st.write(hasil_disambiguation)
-# sentence_ranks = pagerank(hasil_disambiguation)
-# st.write(sentence_ranks)
+col1, col2 = st.beta_columns([3, 1])
+S = build_similarity_matrix(sentences)
+col1.write(S)
+sentence_ranks = pagerank(S)
+col2.write(sentence_ranks)
 
+## Load Word Sense Disambiguation 
 # st.subheader("Index Sentence Ranking")
 # col3, col4 = st.beta_columns([3, 1])
 # ranked_sentence_indexes = [item[0] for item in sorted(enumerate(sentence_ranks), key=lambda item: -item[1])]
