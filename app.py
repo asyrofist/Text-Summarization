@@ -45,8 +45,7 @@ def sentence_similarity(sent1, sent2):
     for w in sent2:
         vector2[all_words.index(w)] += 1
     
-#     return 1 - cosine_distance(vector1, vector2)
-    return 1 - cosine_similarity(vector1, vector2)
+    return 1 - cosine_distance(vector1, vector2)
 
 def build_similarity_matrix(sentences):
     S = np.zeros((len(sentences), len(sentences)))
@@ -67,6 +66,17 @@ S = build_similarity_matrix(sentences)
 col1.write(S)
 sentence_ranks = pagerank(S)
 col2.write(sentence_ranks)
+
+st.subheader("disamiguation")
+# Load Word Sense Disambiguation 
+from pywsd.cosine import cosine_similarity
+disambiguation_df = []
+for angka in range(0, len(sentences)):
+    a = [cosine_similarity(sentences[angka], sentences[num]) for num in range(0, len(sentences))]
+    disambiguation_df.append(a)      
+
+hasil_disambiguation = pd.DataFrame(disambiguation_df)
+st.write(hasil_disambiguation)
 
 ## Load Word Sense Disambiguation 
 # st.subheader("Index Sentence Ranking")
