@@ -159,7 +159,7 @@ elif genre == 'Disambiguation':
     ordering = sorted(range(n_clusters), key=lambda k: avg[k])
 #     summary = ' '.join([sentences[closest[idx]] for idx in ordering])
     value_list = [sentences[closest[idx]] for idx in ordering]
-    values = ','.join([str(i) for i in value_list])
+    values = ' '.join([str(i) for i in value_list])
     st.text(values)
     
 
