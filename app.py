@@ -160,7 +160,7 @@ elif genre == 'Disambiguation':
 #     summary = ' '.join([sentences[closest[idx]] for idx in ordering])
     value_list = [sentences[closest[idx]] for idx in ordering]
 #     values = ' '.join([str(i) for i in value_list])
-    values = ' '.join(value_list)
+    values = ' '.join([value_list])
     st.text(values)
     
 
