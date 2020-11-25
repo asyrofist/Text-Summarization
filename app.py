@@ -6,6 +6,7 @@ from nltk.corpus import brown
 from nltk.cluster.util import cosine_distance
 from operator import itemgetter
 from function import TextCleaner
+from pywsd.cosine import cosine_similarity
 
 nltk.download('brown')
 
@@ -66,15 +67,15 @@ st.subheader("Sentence Ranking")
 # sentence_ranks = pagerank(S)
 # col2.write(sentence_ranks)
 # Load Word Sense Disambiguation 
-from pywsd.cosine import cosine_similarity
-disambiguation_df = []
-for angka in range(0, len(sentences)):
-    a = [cosine_similarity(sentences[angka], sentences[num]) for num in range(0, len(sentences))]
-    disambiguation_df.append(a)      
-hasil_disambiguation = pd.DataFrame(disambiguation_df)
-st.write(hasil_disambiguation)
-sentence_ranks = pagerank(hasil_disambiguation)
-st.write(sentence_ranks)
+st.write(sentences)
+# disambiguation_df = []
+# for angka in range(0, len(sentences)):
+#     a = [cosine_similarity(sentences[angka], sentences[num]) for num in range(0, len(sentences))]
+#     disambiguation_df.append(a)      
+# hasil_disambiguation = pd.DataFrame(disambiguation_df)
+# st.write(hasil_disambiguation)
+# sentence_ranks = pagerank(hasil_disambiguation)
+# st.write(sentence_ranks)
 
 st.subheader("Index Sentence Ranking")
 col3, col4 = st.beta_columns([3, 1])
