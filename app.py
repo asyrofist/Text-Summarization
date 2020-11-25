@@ -15,6 +15,7 @@ from gensim.models import Word2Vec
 from multiprocessing import Pool
 
 nltk.download('brown')
+nltk.download('punkt')
 
 st.sidebar.subheader("Dataset parameter")
 banyak_data = st.sidebar.slider("Berapa Dataset", 0, len(brown.fileids()), 10)
@@ -72,8 +73,10 @@ def build_similarity_matrix(sentences):
 # word embedding
 def word_embedding(sen):
     embeded = 0
-    tokenizer_wrd = TreebankWordTokenizer()
-    word_list = tokenizer_wrd.tokenize(sen)
+#     tokenizer_wrd = TreebankWordTokenizer()
+#     word_list = tokenizer_wrd.tokenize(sen)
+    from nltk.tokenize import word_tokenize
+    word_list = word_tokenize(sen)
     for i in range(len(word_list)):
         if ((word_list[i] in word2vec_model.index2word) == True):
             embeded = embeded + word2vec_model.get_vector(word_list[i])
