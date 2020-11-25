@@ -13,8 +13,7 @@ from sklearn.metrics import pairwise_distances_argmin_min
 
 nltk.download('brown')
 
-st.header("Summarization Corpus Brown")
-st.subheader("Dataset parameter")
+st.sidebar.subheader("Dataset parameter")
 banyak_data = st.sidebar.slider("Berapa Dataset", 0, len(brown.fileids()), 10)
 dataset = st.sidebar.selectbox("Choose Brown Dataset?", brown.fileids()[:banyak_data])
 sentences = brown.sents(dataset)
@@ -66,6 +65,7 @@ def build_similarity_matrix(sentences):
         S[i] /= S[i].sum()
     return S
 
+st.header("Summarization Corpus Brown")
 st.sidebar.subheader("Method Parameter")
 genre = st.sidebar.radio("What's your Method",('TextRank', 'Disambiguation'))
 if genre == 'TextRank':
