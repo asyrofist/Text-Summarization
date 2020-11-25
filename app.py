@@ -73,7 +73,7 @@ def build_similarity_matrix(sentences):
 def word_embedding(sen):
     embeded = 0
     tokenizer_wrd = TreebankWordTokenizer()
-    word_list = tokenizer_wrd.tokenize(sen)
+    word_list = tokenizer_wrd.tokenize(sen).split()
     for i in range(len(word_list)):
         if ((word_list[i] in word2vec_model.index2word) == True):
             embeded = embeded + word2vec_model.get_vector(word_list[i])
