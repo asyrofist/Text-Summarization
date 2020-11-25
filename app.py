@@ -69,6 +69,12 @@ def build_similarity_matrix(sentences):
         S[i] /= S[i].sum()
     return S
 
+def build_lexicon(corpus):
+    lexicon = set()
+    for doc in corpus:
+#         lexicon.update([word for word in doc.split()])
+        lexicon.update([word for word in doc])
+    return lexicon
 
 st.sidebar.subheader("Method Parameter")
 genre = st.sidebar.radio("What's your Method",('TextRank', 'Disambiguation', 'wordembed'))
