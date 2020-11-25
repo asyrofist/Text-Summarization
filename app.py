@@ -159,9 +159,5 @@ elif genre == 'Disambiguation':
     ordering = sorted(range(n_clusters), key=lambda k: avg[k])
 #     summary = ' '.join([sentences[closest[idx]] for idx in ordering])
     for idx in ordering:
-        st.write(sentences[ordering[idx]])
-#         for closest in idx:
-#             st.write(' '.join(sentences[closest]))
-#       st.write(' '.join([str(sentences[closest[idx]])])) 
-#       st.write(' '.join(str(sentences[closest[idx]]))) 
-        
+        summary = sentences[ordering[idx]]
+        st.write(' '.join(summary))        
