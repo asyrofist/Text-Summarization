@@ -157,7 +157,7 @@ elif genre == 'Disambiguation':
         avg.append(np.mean(idx))
     closest, _ = pairwise_distances_argmin_min(modelmn.cluster_centers_, vector)
     ordering = sorted(range(n_clusters), key=lambda k: avg[k])
-    summary = ' '.join([sentences[closest[idx]] for idx in ordering])
-    st.write(summary)
+#     summary = ' '.join([sentences[closest[idx]] for idx in ordering])
+    st.write(join([sentences[closest[idx]] for idx in ordering]))
     
 
