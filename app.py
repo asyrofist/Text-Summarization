@@ -197,6 +197,21 @@ elif genre == 'wordembedRank':
     col1.write(vector_df)
     sentence_ranks = pagerank(vector_df)
     col2.write(sentence_ranks)
+    
+    # Load Word Sense Disambiguation 
+    st.subheader("Index Sentence Ranking")
+    col3, col4 = st.beta_columns([3, 1])
+    ranked_sentence_indexes = [item[0] for item in sorted(enumerate(sentence_ranks), key=lambda item: -item[1])]
+    col3.dataframe(ranked_sentence_indexes)
+    st.sidebar.subheader("Summary Parameter")
+    SUMMARY_SIZE = st.sidebar.slider("Berapa Jumlah Size?", 0, 10, 5)
+    selected_sentences = sorted(ranked_sentence_indexes[:SUMMARY_SIZE])
+    col4.dataframe(selected_sentences)
+
+    st.subheader("Summary Result")
+    summary = itemgetter(*selected_sentences)(sentences)
+    for sent in summary:
+        st.write(' '.join(sent))
 
 elif genre == 'wordembedCluster':
     # Load word2vec pretrained
