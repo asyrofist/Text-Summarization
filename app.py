@@ -147,9 +147,11 @@ elif genre == 'Disambiguation':
 #     summary_mn(SUMMARY_SIZE,vec(data,'wu2v'))
 
     avg = []
-    n_clusters = len(sentences)//SUMMARY_SIZE
+    n = SUMMARY_SIZE
+    vector = [disambiguation_df[i] for i in range(len(sentences))]
+    n_clusters = len(sentences)//n
     modelmn = MiniBatchKMeans(n_clusters=n_clusters) #minibatch
-    modelmn = modelmn.fit([disambiguation_df[i] for i in range(len(sentences))])
+    modelmn = modelmn.fit(vector)
     for j in range(n_clusters):
         idx = np.where(modelmn.labels_ == j)[0]
         avg.append(np.mean(idx))
