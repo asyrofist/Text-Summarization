@@ -5,3 +5,4 @@ gensim
 pywsd>=1.2.0
 rouge
 nltk
+requests~=2.25
