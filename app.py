@@ -215,8 +215,7 @@ elif genre == 'compareMethod':
     ordering = sorted(range(n_clusters), key=lambda k: avg[k])
 
     st.subheader("Summary Result")
-#     summary = ' '.join([list_sentences[closest[idx]] for idx in ordering])
-    summary = [' '.join([list_sentences[closest[idx]] for idx in ordering])]
+    summary = ' '.join([list_sentences[closest[idx]] for idx in ordering])
     st.write(summary)
     
     # Sentence Ranking
@@ -231,15 +230,12 @@ elif genre == 'compareMethod':
 
     st.subheader("Summary Result")
     ringkasan = itemgetter(*selected_sentences)(sentences)
-#     hasilSummary = [' '.join(sent) for sent in ringkasan]
-    hasilSummary = ' '.join([sent for sent in ringkasan])
+    hasilSummary = [' '.join(sent) for sent in ringkasan]
     st.write(hasilSummary)
     
-#     for sent in summary:
-#         st.write(' '.join(sent))
-#     from rouge import Rouge 
-#     hypothesis = (ringkasan)
-#     reference = (hasilSummary)
-#     rouge = Rouge()
-#     scores = rouge.get_scores(hypothesis, reference)
-#     st.dataframe(scores)
+    from rouge import Rouge 
+    hypothesis = (ringkasan)
+    reference = (hasilSummary)
+    rouge = Rouge()
+    scores = rouge.get_scores(hypothesis, reference)
+    st.dataframe(scores)
