@@ -4,4 +4,4 @@ nltk
 streamlit
 sklearn
 gensim
-pywsd
+pywsd==1.2.4
