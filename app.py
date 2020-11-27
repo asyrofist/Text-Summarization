@@ -220,7 +220,7 @@ elif genre == 'compareMethod':
 #     ringkasan = ' '.join([list_sentences[closest[idx]] for idx in ordering])
 #     ringkasan = ' '.join([list_sentences[idx] for idx in ordering])
     ringkasan = []
-    ab = itemgetter(*ordering])(sentences)
+    ab = itemgetter(*ordering)(sentences)
     for num in ab:
         b = ' '.join(num)
         ringkasan.append(b)
