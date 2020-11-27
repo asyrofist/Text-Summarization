@@ -1,7 +1,6 @@
 import streamlit as st
 import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
 import nltk
 from nltk.corpus import brown
 from nltk.cluster.util import cosine_distance
