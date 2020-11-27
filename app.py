@@ -115,6 +115,7 @@ if genre == 'TextRank':
 elif genre == 'DisambiguationRank':
     st.subheader("Sentence Ranking based on Disamiguation")
     # Load Word Sense Disambiguation 
+    from nltk.corpus import wordnet as wn
     import pywsd
     disambiguation_df = []
     for angka in range(0, len(list_sentences)):
