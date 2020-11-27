@@ -13,7 +13,6 @@ from sklearn.cluster import MiniBatchKMeans
 from sklearn.metrics import pairwise_distances_argmin_min
 from gensim.models import Word2Vec
 from multiprocessing import Pool
-from rouge import Rouge 
 
 nltk.download('brown')
 
