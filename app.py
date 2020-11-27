@@ -15,6 +15,7 @@ from multiprocessing import Pool
 from pywsd.cosine import cosine_similarity
 
 nltk.download('brown')
+nltk.download('wordnet')
 
 st.sidebar.subheader("Dataset parameter")
 banyak_data = st.sidebar.slider("Berapa Dataset", 0, len(brown.fileids()), 10)
