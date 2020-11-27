@@ -1,9 +1,8 @@
 numpy
-matplotlib
-nltk
 streamlit
 sklearn
 gensim
 pywsd>=1.2.0
 rouge
 request
+nltk
