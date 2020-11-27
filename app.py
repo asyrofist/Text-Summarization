@@ -161,8 +161,7 @@ elif genre == 'wordembedCluster':
     SUMMARY_SIZE = st.sidebar.slider("Berapa Jumlah Cluster?", 1, len(word_embedding(sentences)), 44)
     avg = []
     n = SUMMARY_SIZE
-#     vector = embedd_vectors
-    vector = [word_embedding(num) for num in list_sentences]
+    vector = embedd_vectors[:SUMMARY_SIZE]
     st.subheader("Vector Word Embedding")
     st.dataframe(vector)
     n_clusters = len(sentences)//n
