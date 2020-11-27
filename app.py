@@ -146,6 +146,7 @@ elif genre == 'wordembedRank':
     st.write(hasilSummary)
 #     for sent in summary:
 #         st.write(' '.join(sent))
+
 elif genre == 'wordembedCluster':
     # Load word2vec pretrained
     st.sidebar.subheader("Word2vec Parameter")
@@ -201,7 +202,7 @@ elif genre == 'compareMethod':
     unknown_embedd = np.zeros(300)
     
     st.sidebar.subheader("Cluster Parameter")
-    SUMMARY_SIZE = st.sidebar.slider("Berapa Jumlah Cluster?", 1, len(word_embedding(sentences)), 20)
+    SUMMARY_SIZE = st.sidebar.slider("Berapa Jumlah Cluster?", 1, len(word_embedding(sentences)), 19)
     avg = []
     n = SUMMARY_SIZE
     vector = embedd_vectors[:SUMMARY_SIZE]
