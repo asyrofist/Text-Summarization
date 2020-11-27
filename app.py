@@ -219,8 +219,9 @@ elif genre == 'compareMethod':
 #     ringkasan = ' '.join([list_sentences[closest[idx]] for idx in ordering])
 #     ringkasan = ' '.join([list_sentences[idx] for idx in ordering])
     ringkasan = []
-    for idx in ordering:
-        b = ' '.join([list_sentences[closest[idx]] for idx in ordering])
+    ab = itemgetter(*ordering)(list_sentences)
+    for num in ab:
+        b = ' '.join(num)
         ringkasan.append(b)
     st.write(ringkasan)
     
