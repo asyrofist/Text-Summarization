@@ -78,7 +78,7 @@ def build_lexicon(corpus):
 # word embedding
 def word_embedding(sen):
     embeded = 0
-    vocabulary = build_lexicon(list_sentences)
+    vocabulary = build_lexicon(sentences)
     word_list = [word for word in vocabulary]
     for i in range(len(word_list)):
         if ((word_list[i] in word2vec_model.wv.index2word) == True):
@@ -196,17 +196,17 @@ elif genre == 'compareMethod':
     mode_value = st.sidebar.selectbox("Pilih Mode", [1, 0])
     window_value = st.sidebar.slider("WIndows Size?", 0, 10, 3)
     iteration_value = st.sidebar.slider("iteration size?", 0, 100, 10) 
-    word2vec_model = Word2Vec(sentences = list_sentences, size = size_value, sg = mode_value, window = window_value, min_count = 1, iter = iteration_value, workers = Pool()._processes)
+    word2vec_model = Word2Vec(sentences = sentences, size = size_value, sg = mode_value, window = window_value, min_count = 1, iter = iteration_value, workers = Pool()._processes)
     word2vec_model.init_sims(replace = True)
     embedd_vectors = word2vec_model.wv.vectors
     unknown_embedd = np.zeros(300)
     
     st.sidebar.subheader("Cluster Parameter")
-    SUMMARY_SIZE = st.sidebar.slider("Berapa Jumlah Cluster?", 1, len(word_embedding(list_sentences)), 44)
+    SUMMARY_SIZE = st.sidebar.slider("Berapa Jumlah Cluster?", 1, len(word_embedding(sentences)), 44)
     avg = []
     n = SUMMARY_SIZE
-    vector = [word_embedding(list_sentences[i]) for i in range(len(list_sentences))]
-    n_clusters = len(list_sentences)//n
+    vector = [word_embedding(sentences[i]) for i in range(len(list_sentences))]
+    n_clusters = len(sentences)//n
     modelmn = MiniBatchKMeans(n_clusters=n_clusters) #minibatch
     modelmn = modelmn.fit(vector)
     for j in range(n_clusters):
@@ -219,7 +219,7 @@ elif genre == 'compareMethod':
 #     ringkasan = ' '.join([list_sentences[closest[idx]] for idx in ordering])
 #     ringkasan = ' '.join([list_sentences[idx] for idx in ordering])
     ringkasan = []
-    ab = itemgetter(*closest)(sentences)
+    ab = itemgetter(*ordering)(sentences)
     for num in ab:
         b = ' '.join(num)
         ringkasan.append(b)
