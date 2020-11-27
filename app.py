@@ -215,8 +215,13 @@ elif genre == 'compareMethod':
     ordering = sorted(range(n_clusters), key=lambda k: avg[k])
 
     st.subheader("Summary Result Cluster")
-    summary = ' '.join([list_sentences[closest[idx]].split() for idx in ordering])
+    summary = ' '.join([list_sentences[closest[idx]] for idx in ordering])
     st.write(summary)
+    
+    ringkasan = itemgetter(*ordering)(sentences)
+    hasilRingkasan = [' '.join(num) for sent in ringkasan]
+    st.write(hasilRingkasan)
+    
     
     # Sentence Ranking
     vector = [word_embedding(sentences[i]) for i in range(len(sentences))]
@@ -228,12 +233,12 @@ elif genre == 'compareMethod':
     selected_sentences = sorted(ranked_sentence_indexes[:SUMMARY_SIZE])
 
     st.subheader("Summary Result Rank")
-    ringkasan = itemgetter(*selected_sentences)(sentences)
-    hasilSummary = [' '.join(sent) for sent in ringkasan]
+    rangkuman = itemgetter(*selected_sentences)(sentences)
+    hasilSummary = [' '.join(sent) for sent in rangkuman]
     st.write(hasilSummary)
     
     from rouge import Rouge 
-    hypothesis = (summary)
+    hypothesis = (hasilRingkasan)
     reference = (hasilSummary)
     rouge = Rouge()
     scores = rouge.get_scores(hypothesis, reference)
