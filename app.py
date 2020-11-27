@@ -111,7 +111,7 @@ if genre == 'TextRank':
         st.write(' '.join(sent))
 
 elif genre == 'wordembedRank':
-    st.subheader("Sentence Ranking based on Disamiguation")
+    st.subheader("Sentence Ranking based on WordEmbedding")
     # Load Word Sense Disambiguation 
     st.sidebar.subheader("Word2vec Parameter")
     size_value = st.sidebar.slider("Berapa size?", 0, 200, len(sentences))
