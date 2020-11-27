@@ -214,24 +214,23 @@ elif genre == 'compareMethod':
     closest, _ = pairwise_distances_argmin_min(modelmn.cluster_centers_, vector)
     ordering = sorted(range(n_clusters), key=lambda k: avg[k])
 
-    st.subheader("Summary Result")
-    summary = [' '.join([list_sentences[closest[idx]] for idx in ordering])]
-    st.write(summary)
+    st.subheader("Summary Result Cluster")
+    summary = ' '.join([list_sentences[closest[idx]] for idx in ordering])
+    st.text(summary)
     
     # Sentence Ranking
     vector = [word_embedding(sentences[i]) for i in range(len(sentences))]
     vector_df = pd.DataFrame(vector)
     sentence_ranks = pagerank(vector_df)
     
-    # Load Word Sense Disambiguation 
     ranked_sentence_indexes = [item[0] for item in sorted(enumerate(sentence_ranks), key=lambda item: -item[1])]
     SUMMARY_SIZE = st.sidebar.slider("Berapa Jumlah Size?", 0, 10, 5)
     selected_sentences = sorted(ranked_sentence_indexes[:SUMMARY_SIZE])
 
-    st.subheader("Summary Result")
+    st.subheader("Summary Result Rank")
     ringkasan = itemgetter(*selected_sentences)(sentences)
     hasilSummary = [' '.join(sent) for sent in ringkasan]
-    st.write(hasilSummary)
+    st.text(hasilSummary)
     
     from rouge import Rouge 
     hypothesis = (ringkasan)
