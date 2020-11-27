@@ -123,7 +123,8 @@ elif genre == 'wordembedRank':
 
     col1, col2 = st.beta_columns([3, 1])
     st.subheader("Sentence Ranking")
-    vector = [word_embedding(sentences[i]) for i in range(len(sentences))]
+    vector = embedd_vectors[:SUMMARY_SIZE]
+#     vector = [word_embedding(sentences[i]) for i in range(len(sentences))]
     vector_df = pd.DataFrame(vector)
     col1.write(vector_df)
     sentence_ranks = pagerank(vector_df)
