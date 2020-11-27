@@ -115,9 +115,10 @@ if genre == 'TextRank':
 elif genre == 'DisambiguationRank':
     st.subheader("Sentence Ranking based on Disamiguation")
     # Load Word Sense Disambiguation 
+    import pywsd
     disambiguation_df = []
     for angka in range(0, len(list_sentences)):
-        a = [cosine_similarity(list_sentences[angka], list_sentences[num]) for num in range(0, len(list_sentences))]
+        a = [pywsd.cosine.cosine_similarity(list_sentences[angka], list_sentences[num]) for num in range(0, len(list_sentences))]
         disambiguation_df.append(a)      
     col1, col2 = st.beta_columns([3, 1])
     st.subheader("Sentence Ranking")
