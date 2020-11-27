@@ -216,12 +216,11 @@ elif genre == 'compareMethod':
     ordering = sorted(range(n_clusters), key=lambda k: avg[k])
 
     st.subheader("Summary Word2vecCluster Result")
-#     ringkasan = ' '.join([list_sentences[closest[idx]] for idx in ordering])
-#     ringkasan = ' '.join([sentences[closest[idx]] for idx in ordering])
-    ringkasan = []
-    for idx in ordering:
-        a = ' '.join(sentences[closest[idx]])
-        ringkasan.append(a)
+    ringkasan = ' '.join([list_sentences[closest[idx]] for idx in ordering])
+#     ringkasan = []
+#     for idx in ordering:
+#         a = ' '.join(sentences[closest[idx]])
+#         ringkasan.append(a)
     st.write(ringkasan)
     
     # Sentence Ranking
