@@ -2,6 +2,6 @@ numpy
 streamlit
 sklearn
 gensim
-pywsd==1.2.0
+pywsd
 rouge
 nltk
