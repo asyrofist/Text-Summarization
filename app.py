@@ -231,7 +231,7 @@ elif genre == 'compareMethod':
     st.subheader("Summary Result")
     summary = itemgetter(*selected_sentences)(sentences)
 #     hasilSummary = [' '.join(sent) for sent in summary]
-    hasilSummary = ' '.join([(sent) for sent in summary])
+    hasilSummary = ' '.join([[sent] for sent in summary])
     st.write(hasilSummary)
     
 #     for sent in summary:
