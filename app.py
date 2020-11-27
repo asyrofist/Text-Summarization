@@ -71,7 +71,6 @@ def build_similarity_matrix(sentences):
 def build_lexicon(corpus):
     lexicon = set()
     for doc in corpus:
-#         lexicon.update([word for word in doc.split()])
         lexicon.update([word for word in doc])
     return lexicon
 
@@ -156,18 +155,15 @@ elif genre == 'wordembedCluster':
     word2vec_model = Word2Vec(sentences = sentences, size = size_value, sg = mode_value, window = window_value, min_count = 1, iter = iteration_value, workers = Pool()._processes)
     word2vec_model.init_sims(replace = True)
     embedd_vectors = word2vec_model.wv.vectors
-#     st.write(embedd_vectors)
     unknown_embedd = np.zeros(300)
     
     st.sidebar.subheader("Cluster Parameter")
-#     word_embedding(sentences)
     SUMMARY_SIZE = st.sidebar.slider("Berapa Jumlah Cluster?", 1, len(word_embedding(sentences)), 44)
     avg = []
     n = SUMMARY_SIZE
-    vector = [word_embedding(sentences[i]) for i in range(len(sentences))]
+    vector = embedd_vectors
     st.subheader("Vector Word Embedding")
     st.dataframe(vector)
-#     vector = [embedd_vectors]
     n_clusters = len(sentences)//n
     modelmn = MiniBatchKMeans(n_clusters=n_clusters) #minibatch
     modelmn = modelmn.fit(vector)
@@ -186,67 +182,67 @@ elif genre == 'wordembedCluster':
     st.write(summary)
     
     
-elif genre == 'compareMethod':
-    # Load word2vec pretrained
-    st.header("Compare Parameter")
+# elif genre == 'compareMethod':
+#     # Load word2vec pretrained
+#     st.header("Compare Parameter")
     
-    # Load word2vec pretrained
-    st.sidebar.subheader("Word2vec Parameter")
-    size_value = st.sidebar.slider("Berapa size?", 0, 200, len(list_sentences))
-    mode_value = st.sidebar.selectbox("Pilih Mode", [1, 0])
-    window_value = st.sidebar.slider("WIndows Size?", 0, 10, 3)
-    iteration_value = st.sidebar.slider("iteration size?", 0, 100, 10) 
-    word2vec_model = Word2Vec(sentences = sentences, size = size_value, sg = mode_value, window = window_value, min_count = 1, iter = iteration_value, workers = Pool()._processes)
-    word2vec_model.init_sims(replace = True)
-    embedd_vectors = word2vec_model.wv.vectors
-    unknown_embedd = np.zeros(300)
+#     # Load word2vec pretrained
+#     st.sidebar.subheader("Word2vec Parameter")
+#     size_value = st.sidebar.slider("Berapa size?", 0, 200, len(list_sentences))
+#     mode_value = st.sidebar.selectbox("Pilih Mode", [1, 0])
+#     window_value = st.sidebar.slider("WIndows Size?", 0, 10, 3)
+#     iteration_value = st.sidebar.slider("iteration size?", 0, 100, 10) 
+#     word2vec_model = Word2Vec(sentences = sentences, size = size_value, sg = mode_value, window = window_value, min_count = 1, iter = iteration_value, workers = Pool()._processes)
+#     word2vec_model.init_sims(replace = True)
+#     embedd_vectors = word2vec_model.wv.vectors
+#     unknown_embedd = np.zeros(300)
     
-    st.sidebar.subheader("Cluster Parameter")
-    SUMMARY_SIZE = st.sidebar.slider("Berapa Jumlah Cluster?", 1, len(word_embedding(sentences)), 44)
-    avg = []
-    n = SUMMARY_SIZE
-    vector = [word_embedding(sentences[i]) for i in range(len(sentences))]
-    n_clusters = len(sentences)//n
-    modelmn = MiniBatchKMeans(n_clusters=n_clusters) #minibatch
-    modelmn = modelmn.fit(vector)
-    for j in range(n_clusters):
-        idx = np.where(modelmn.labels_ == j)[0]
-        avg.append(np.mean(idx))
-    closest, _ = pairwise_distances_argmin_min(modelmn.cluster_centers_, vector)
-    ordering = sorted(range(n_clusters), key=lambda k: avg[k])
-    st.write(ordering)
-    st.write(closest)
+#     st.sidebar.subheader("Cluster Parameter")
+#     SUMMARY_SIZE = st.sidebar.slider("Berapa Jumlah Cluster?", 1, len(word_embedding(sentences)), 44)
+#     avg = []
+#     n = SUMMARY_SIZE
+#     vector = [word_embedding(sentences[i]) for i in range(len(sentences))]
+#     n_clusters = len(sentences)//n
+#     modelmn = MiniBatchKMeans(n_clusters=n_clusters) #minibatch
+#     modelmn = modelmn.fit(vector)
+#     for j in range(n_clusters):
+#         idx = np.where(modelmn.labels_ == j)[0]
+#         avg.append(np.mean(idx))
+#     closest, _ = pairwise_distances_argmin_min(modelmn.cluster_centers_, vector)
+#     ordering = sorted(range(n_clusters), key=lambda k: avg[k])
+#     st.write(ordering)
+#     st.write(closest)
     
-    st.subheader("Summary Word2vecCluster Result")
-#     ringkasan = ' '.join([list_sentences[closest[idx]] for idx in ordering])
-#     ringkasan = ' '.join([list_sentences[idx] for idx in ordering])
-    ringkasan = []
-    ab = itemgetter(*ordering)(sentences)
-    for num in ab:
-        b = ' '.join(num)
-        ringkasan.append(b)
-    st.write(ringkasan)
+#     st.subheader("Summary Word2vecCluster Result")
+# #     ringkasan = ' '.join([list_sentences[closest[idx]] for idx in ordering])
+# #     ringkasan = ' '.join([list_sentences[idx] for idx in ordering])
+#     ringkasan = []
+#     ab = itemgetter(*ordering)(sentences)
+#     for num in ab:
+#         b = ' '.join(num)
+#         ringkasan.append(b)
+#     st.write(ringkasan)
     
-    # Sentence Ranking
-    col1, col2 = st.beta_columns([3, 1])
-    S = build_similarity_matrix(sentences)
-    sentence_ranks = pagerank(S)
+#     # Sentence Ranking
+#     col1, col2 = st.beta_columns([3, 1])
+#     S = build_similarity_matrix(sentences)
+#     sentence_ranks = pagerank(S)
     
-    ranked_sentence_indexes = [item[0] for item in sorted(enumerate(sentence_ranks), key=lambda item: -item[1])]
-    SUMMARY_SIZE = st.sidebar.slider("Berapa Jumlah Size?", 0, 10, 5)
-    selected_sentences = sorted(ranked_sentence_indexes[:SUMMARY_SIZE])
+#     ranked_sentence_indexes = [item[0] for item in sorted(enumerate(sentence_ranks), key=lambda item: -item[1])]
+#     SUMMARY_SIZE = st.sidebar.slider("Berapa Jumlah Size?", 0, 10, 5)
+#     selected_sentences = sorted(ranked_sentence_indexes[:SUMMARY_SIZE])
 
-    st.subheader("Summary Rank Result")
-    summary = itemgetter(*selected_sentences)(sentences)
-    hasilSummary = []
-    for sent in summary:
-        a = ' '.join(sent)
-        hasilSummary.append(a)
-    st.write(hasilSummary)
+#     st.subheader("Summary Rank Result")
+#     summary = itemgetter(*selected_sentences)(sentences)
+#     hasilSummary = []
+#     for sent in summary:
+#         a = ' '.join(sent)
+#         hasilSummary.append(a)
+#     st.write(hasilSummary)
     
-    from rouge import Rouge 
-    hypothesis = (ringkasan)
-    reference = (hasilSummary)
-    rouge = Rouge()
-    scores = rouge.get_scores(hypothesis, reference)
-    st.dataframe(scores)
+#     from rouge import Rouge 
+#     hypothesis = (ringkasan)
+#     reference = (hasilSummary)
+#     rouge = Rouge()
+#     scores = rouge.get_scores(hypothesis, reference)
+#     st.dataframe(scores)
