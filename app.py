@@ -78,7 +78,7 @@ def build_lexicon(corpus):
 # word embedding
 def word_embedding(sen):
     embeded = 0
-    vocabulary = build_lexicon(sentences)
+    vocabulary = build_lexicon(list_sentences)
     word_list = [word for word in vocabulary]
     for i in range(len(word_list)):
         if ((word_list[i] in word2vec_model.wv.index2word) == True):
@@ -192,7 +192,7 @@ elif genre == 'compareMethod':
     
     # Load word2vec pretrained
     st.sidebar.subheader("Word2vec Parameter")
-    size_value = st.sidebar.slider("Berapa size?", 0, 200, len(sentences))
+    size_value = st.sidebar.slider("Berapa size?", 0, 200, len(list_sentences))
     mode_value = st.sidebar.selectbox("Pilih Mode", [1, 0])
     window_value = st.sidebar.slider("WIndows Size?", 0, 10, 3)
     iteration_value = st.sidebar.slider("iteration size?", 0, 100, 10) 
