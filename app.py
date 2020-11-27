@@ -250,3 +250,9 @@ elif genre == 'compareMethod':
         hasilSummary.append(' '.join(sent))
         st.write(' '.join(sent))
     
+    from rouge import Rouge 
+    hypothesis = summary # prediction
+    reference = hasilSummary # actual
+    rouge = Rouge()
+    scores = rouge.get_scores(hypothesis, reference)
+    st.write(scores)
