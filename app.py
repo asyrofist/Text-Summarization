@@ -252,10 +252,7 @@ elif genre == 'compareMethod':
     
     from rouge import Rouge 
     hypothesis = summary # prediction
-    
-    data = """The Fulton County Grand Jury said Friday an investigation of Atlanta's recent primary election produced no evidence '' that any irregularities took place . The Fulton County Grand Jury said Friday an investigation of Atlanta's recent primary election produced no evidence '' that any irregularities took place ."""
-    
-    reference = data # actual
+    reference = summary # actual
     rouge = Rouge()
     scores = rouge.get_scores(hypothesis, reference)
     st.write(scores)
