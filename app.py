@@ -190,7 +190,7 @@ elif genre == 'compareMethod':
     # Load word2vec pretrained
     st.header("Compare Parameter")
     
-        # Load word2vec pretrained
+    # Load word2vec pretrained
     st.sidebar.subheader("Word2vec Parameter")
     size_value = st.sidebar.slider("Berapa size?", 0, 200, len(sentences))
     mode_value = st.sidebar.selectbox("Pilih Mode", [1, 0])
@@ -206,8 +206,6 @@ elif genre == 'compareMethod':
     avg = []
     n = SUMMARY_SIZE
     vector = [word_embedding(sentences[i]) for i in range(len(sentences))]
-#     st.subheader("Vector Word Embedding")
-#     st.dataframe(vector)
     n_clusters = len(sentences)//n
     modelmn = MiniBatchKMeans(n_clusters=n_clusters) #minibatch
     modelmn = modelmn.fit(vector)
@@ -216,32 +214,20 @@ elif genre == 'compareMethod':
         avg.append(np.mean(idx))
     closest, _ = pairwise_distances_argmin_min(modelmn.cluster_centers_, vector)
     ordering = sorted(range(n_clusters), key=lambda k: avg[k])
-#     st.subheader("Closest & Ordering Cluster")
-#     col5, col6 = st.beta_columns([1, 1])
-#     col5.dataframe(closest)
-#     col6.dataframe(ordering)
 
     st.subheader("Summary Word2vecCluster Result")
-    ringkasan = ' '.join([list_sentences[closest[idx]] for idx in ordering])
+#     ringkasan = ' '.join([list_sentences[closest[idx]] for idx in ordering])
+    ringkasan = ' '.join([sentences[closest[idx]] for idx in ordering])
     st.write(ringkasan)
     
     # Sentence Ranking
-#     st.subheader("Sentence Ranking")
     col1, col2 = st.beta_columns([3, 1])
     S = build_similarity_matrix(sentences)
-#     col1.write(S)
     sentence_ranks = pagerank(S)
-#     col2.write(sentence_ranks)
     
-    # Load Word Sense Disambiguation 
-#     st.subheader("Index Sentence Ranking")
-#     col3, col4 = st.beta_columns([3, 1])
     ranked_sentence_indexes = [item[0] for item in sorted(enumerate(sentence_ranks), key=lambda item: -item[1])]
-#     col3.dataframe(ranked_sentence_indexes)
-#     st.sidebar.subheader("Summary Parameter")
     SUMMARY_SIZE = st.sidebar.slider("Berapa Jumlah Size?", 0, 10, 5)
     selected_sentences = sorted(ranked_sentence_indexes[:SUMMARY_SIZE])
-#     col4.dataframe(selected_sentences)
 
     st.subheader("Summary Rank Result")
     summary = itemgetter(*selected_sentences)(sentences)
@@ -251,9 +237,7 @@ elif genre == 'compareMethod':
         st.write(' '.join(sent))
     
     from rouge import Rouge 
-#     hypothesis = "the #### transcript is a written version of each day 's cnn student news program use this transcript to he    lp students with reading comprehension and vocabulary use the weekly newsquiz to test your knowledge of storie s you     saw on cnn student news"
-#     reference = "this page includes the show transcript use the transcript to help students with reading comprehension and     vocabulary at the bottom of the page , comment for a chance to be mentioned on cnn student news . you must be a teac    her or a student age # # or older to request a mention on the cnn student news roll call . the weekly newsquiz tests     students ' knowledge of even ts in the news"
-    hypothesis = (ringkasan.split())
+    hypothesis = ("the #### transcript is a written version of each day 's cnn student news program use this transcript to he    lp students with reading comprehension and vocabulary use the weekly newsquiz to test your knowledge of storie s you     saw on cnn student news")
     reference = (hasilSummary)
     rouge = Rouge()
     scores = rouge.get_scores(hypothesis, reference)
