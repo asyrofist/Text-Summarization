@@ -217,11 +217,8 @@ elif genre == 'compareMethod':
 
     st.subheader("Summary Word2vecCluster Result")
 #     ringkasan = ' '.join([list_sentences[closest[idx]] for idx in ordering])
-    ringkasan = ' '.join([list_sentences[idx] for idx in ordering])
-#     ringkasan = []
-#     for idx in ordering:
-#         a = ' '.join(sentences[closest[idx]])
-#         ringkasan.append(a)
+#     ringkasan = ' '.join([list_sentences[idx] for idx in ordering])
+    ringkasan = ' '.join([list_sentences[idx] for idx in closest])
     st.write(ringkasan)
     
     # Sentence Ranking
@@ -235,11 +232,11 @@ elif genre == 'compareMethod':
 
     st.subheader("Summary Rank Result")
     summary = itemgetter(*selected_sentences)(sentences)
-    hasilSummary = [' '.join(sent) for sent in summary]
+    hasilSummary = ' '.join([sent for sent in summary]) 
     st.write(hasilSummary)
     
     from rouge import Rouge 
-    hypothesis = (hasilSummary)
+    hypothesis = (ringkasan)
     reference = (hasilSummary)
     rouge = Rouge()
     scores = rouge.get_scores(hypothesis, reference)
