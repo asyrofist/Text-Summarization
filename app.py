@@ -216,7 +216,7 @@ elif genre == 'compareMethod':
 
     st.subheader("Summary Result Cluster")
     summary = ' '.join([list_sentences[closest[idx]] for idx in ordering])
-    st.text(summary)
+    st.write(summary)
     
     # Sentence Ranking
     vector = [word_embedding(sentences[i]) for i in range(len(sentences))]
@@ -230,10 +230,10 @@ elif genre == 'compareMethod':
     st.subheader("Summary Result Rank")
     ringkasan = itemgetter(*selected_sentences)(sentences)
     hasilSummary = [' '.join(sent) for sent in ringkasan]
-    st.text(hasilSummary)
+    st.write(hasilSummary)
     
     from rouge import Rouge 
-    hypothesis = (ringkasan)
+    hypothesis = (summary)
     reference = (hasilSummary)
     rouge = Rouge()
     scores = rouge.get_scores(hypothesis, reference)
