@@ -205,7 +205,7 @@ elif genre == 'compareMethod':
     SUMMARY_SIZE = st.sidebar.slider("Berapa Jumlah Cluster?", 1, len(word_embedding(sentences)), 44)
     avg = []
     n = SUMMARY_SIZE
-    vector = [word_embedding(sentences[i]) for i in range(len(sentences))]
+    vector = [word_embedding(list_sentences[i]) for i in range(len(list_sentences))]
     n_clusters = len(sentences)//n
     modelmn = MiniBatchKMeans(n_clusters=n_clusters) #minibatch
     modelmn = modelmn.fit(vector)
@@ -220,7 +220,7 @@ elif genre == 'compareMethod':
 #     ringkasan = ' '.join([list_sentences[idx] for idx in ordering])
     ringkasan = []
     for idx in ordering:
-        b = ' '.join([sentences[closest[idx]] for idx in ordering])
+        b = ' '.join([list_sentences[closest[idx]] for idx in ordering])
         ringkasan.append(b)
     st.write(ringkasan)
     
