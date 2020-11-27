@@ -8,7 +8,6 @@ from nltk.cluster.util import cosine_distance
 from nltk.tokenize import TreebankWordTokenizer
 from operator import itemgetter
 from function import TextCleaner
-from pywsd.cosine import cosine_similarity
 from sklearn.cluster import MiniBatchKMeans
 from sklearn.metrics import pairwise_distances_argmin_min
 from gensim.models import Word2Vec
