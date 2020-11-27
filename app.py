@@ -12,8 +12,6 @@ from sklearn.cluster import MiniBatchKMeans
 from sklearn.metrics import pairwise_distances_argmin_min
 from gensim.models import Word2Vec
 from multiprocessing import Pool
-from nltk.corpus import wordnet as wn
-from pywsd.cosine import cosine_similarity
 
 nltk.download('brown')
 
@@ -113,72 +111,6 @@ if genre == 'TextRank':
     summary = itemgetter(*selected_sentences)(sentences)
     for sent in summary:
         st.write(' '.join(sent))
-        
-elif genre == 'DisambiguationRank':
-    st.subheader("Sentence Ranking based on Disamiguation")
-    # Load Word Sense Disambiguation 
-    disambiguation_df = []
-    for angka in range(0, len(list_sentences)):
-        a = [cosine_similarity(list_sentences[angka], list_sentences[num]) for num in range(0, len(list_sentences))]
-        disambiguation_df.append(a)      
-    col1, col2 = st.beta_columns([3, 1])
-    st.subheader("Sentence Ranking")
-    hasil_disambiguation = pd.DataFrame(disambiguation_df)
-    col1.write(hasil_disambiguation)
-    sentence_ranks = pagerank(hasil_disambiguation)
-    col2.write(sentence_ranks)
-    
-    # Load Word Sense Disambiguation 
-    st.subheader("Index Sentence Ranking")
-    col3, col4 = st.beta_columns([3, 1])
-    ranked_sentence_indexes = [item[0] for item in sorted(enumerate(sentence_ranks), key=lambda item: -item[1])]
-    col3.dataframe(ranked_sentence_indexes)
-    st.sidebar.subheader("Summary Parameter")
-    SUMMARY_SIZE = st.sidebar.slider("Berapa Jumlah Size?", 0, 10, 5)
-    selected_sentences = sorted(ranked_sentence_indexes[:SUMMARY_SIZE])
-    col4.dataframe(selected_sentences)
-
-    st.subheader("Summary Result")
-    summary = itemgetter(*selected_sentences)(sentences)
-    for sent in summary:
-        st.write(' '.join(sent))
-        
-elif genre == 'DisambiguationCluster':
-    st.subheader("Sentence Ranking based on Disamiguation")
-    # Load Word Sense Disambiguation 
-    disambiguation_df = []
-    for angka in range(0, len(list_sentences)):
-        a = [cosine_similarity(list_sentences[angka], list_sentences[num]) for num in range(0, len(list_sentences))]
-        disambiguation_df.append(a)      
-
-    hasil_disambiguation = pd.DataFrame(disambiguation_df)
-    st.write(hasil_disambiguation)
-    
-    st.sidebar.subheader("Cluster Parameter")
-    SUMMARY_SIZE = st.sidebar.slider("Berapa Jumlah Cluster?", 1, len(disambiguation_df), 44)
-    avg = []
-    n = SUMMARY_SIZE
-    vector = [disambiguation_df[i] for i in range(len(sentences))]
-    n_clusters = len(sentences)//n
-    modelmn = MiniBatchKMeans(n_clusters=n_clusters) #minibatch
-    modelmn = modelmn.fit(vector)
-    for j in range(n_clusters):
-        idx = np.where(modelmn.labels_ == j)[0]
-        avg.append(np.mean(idx))
-    closest, _ = pairwise_distances_argmin_min(modelmn.cluster_centers_, vector)
-    ordering = sorted(range(n_clusters), key=lambda k: avg[k])
-    st.subheader("Closest & Ordering Cluster")
-    col5, col6 = st.beta_columns([1, 1])
-    col5.dataframe(closest)
-    col6.dataframe(ordering)
-
-    st.subheader("Summary Result")
-    summary = ' '.join([list_sentences[closest[idx]] for idx in ordering])
-    st.write(summary)
-    
-#     for idx in ordering:
-#         summary = sentences[ordering[idx]]
-#         st.write(' '.join(summary))        
 
 elif genre == 'wordembedRank':
     st.subheader("Sentence Ranking based on Disamiguation")
