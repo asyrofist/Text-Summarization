@@ -12,6 +12,8 @@ from sklearn.cluster import MiniBatchKMeans
 from sklearn.metrics import pairwise_distances_argmin_min
 from gensim.models import Word2Vec
 from multiprocessing import Pool
+from nltk.corpus import wordnet as wn
+from pywsd.cosine import cosine_similarity
 
 nltk.download('brown')
 
@@ -115,11 +117,9 @@ if genre == 'TextRank':
 elif genre == 'DisambiguationRank':
     st.subheader("Sentence Ranking based on Disamiguation")
     # Load Word Sense Disambiguation 
-    from nltk.corpus import wordnet as wn
-    import pywsd
     disambiguation_df = []
     for angka in range(0, len(list_sentences)):
-        a = [pywsd.cosine.cosine_similarity(list_sentences[angka], list_sentences[num]) for num in range(0, len(list_sentences))]
+        a = [cosine_similarity(list_sentences[angka], list_sentences[num]) for num in range(0, len(list_sentences))]
         disambiguation_df.append(a)      
     col1, col2 = st.beta_columns([3, 1])
     st.subheader("Sentence Ranking")
