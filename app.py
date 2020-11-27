@@ -214,12 +214,13 @@ elif genre == 'compareMethod':
         avg.append(np.mean(idx))
     closest, _ = pairwise_distances_argmin_min(modelmn.cluster_centers_, vector)
     ordering = sorted(range(n_clusters), key=lambda k: avg[k])
-
+    st.write(ordering)
+    
     st.subheader("Summary Word2vecCluster Result")
 #     ringkasan = ' '.join([list_sentences[closest[idx]] for idx in ordering])
 #     ringkasan = ' '.join([list_sentences[idx] for idx in ordering])
     ringkasan = []
-    ab = itemgetter(*[list_sentences[closest[idx]] for idx in ordering])(sentences)
+    ab = itemgetter(*ordering])(sentences)
     for num in ab:
         b = ' '.join(num)
         ringkasan.append(b)
