@@ -201,7 +201,7 @@ elif genre == 'compareMethod':
     embedd_vectors = word2vec_model.wv.vectors
     unknown_embedd = np.zeros(300)
     
-#     st.sidebar.subheader("Cluster Parameter")
+    st.sidebar.subheader("Cluster Parameter")
     SUMMARY_SIZE = st.sidebar.slider("Berapa Jumlah Cluster?", 1, len(word_embedding(sentences)), 44)
     avg = []
     n = SUMMARY_SIZE
