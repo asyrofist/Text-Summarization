@@ -12,8 +12,7 @@ from sklearn.cluster import MiniBatchKMeans
 from sklearn.metrics import pairwise_distances_argmin_min
 from gensim.models import Word2Vec
 from multiprocessing import Pool
-import wordnet as wn
-from pywsd.cosine import cosine_similarity
+import pywsd
 
 nltk.download('brown')
 nltk.download('wordnet')
