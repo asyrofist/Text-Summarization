@@ -228,6 +228,7 @@ elif genre == 'compareMethod':
     vector_df = pd.DataFrame(vector)
     sentence_ranks = pagerank(vector_df)
     
+    st.sidebar.subheader("Rank Parameter")
     ranked_sentence_indexes = [item[0] for item in sorted(enumerate(sentence_ranks), key=lambda item: -item[1])]
     SUMMARY_SIZE = st.sidebar.slider("Berapa Jumlah Size?", 0, 10, 5)
     selected_sentences = sorted(ranked_sentence_indexes[:SUMMARY_SIZE])
