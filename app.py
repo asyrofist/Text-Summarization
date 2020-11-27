@@ -12,10 +12,8 @@ from sklearn.cluster import MiniBatchKMeans
 from sklearn.metrics import pairwise_distances_argmin_min
 from gensim.models import Word2Vec
 from multiprocessing import Pool
-import pywsd
 
 nltk.download('brown')
-nltk.download('wordnet')
 
 st.sidebar.subheader("Dataset parameter")
 banyak_data = st.sidebar.slider("Berapa Dataset", 0, len(brown.fileids()), 10)
