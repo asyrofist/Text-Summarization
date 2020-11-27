@@ -255,7 +255,7 @@ elif genre == 'wordembedCluster':
     
 elif genre == 'compareMethod':
     # Load word2vec pretrained
-    st.sidebar.subheader("Compare Parameter")
+    st.subheader("Compare Parameter")
     
         # Load word2vec pretrained
     st.sidebar.subheader("Word2vec Parameter")
