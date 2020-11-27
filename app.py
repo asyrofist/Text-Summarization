@@ -317,8 +317,22 @@ elif genre == 'compareMethod':
 
     st.subheader("Summary DisambiguationRank Result")
     rangkum = itemgetter(*selected_sentences)(sentences)
+    hasilRangkum = []
     for sent in rangkum:
-        st.write(' '.join(sent))
+        a = ' '.join(sent)
+        hasilRangkum.append(a)
+        st.write(a)
 
+        
+    st.subheader("Rouge Compare Parameter")
+    from rouge import Rouge 
+
+    # hypothesis = summary_mn(3,vec(data,'w2v'))
+    hypothesis = summary
+    reference = hasilRangkum
+
+    rouge = Rouge()
+    scores = rouge.get_scores(hypothesis, reference)
+    st.write(scores)
     
     
