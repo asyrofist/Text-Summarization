@@ -178,8 +178,14 @@ elif genre == 'wordembedCluster':
     col6.dataframe(ordering)
 
     st.subheader("Summary Result")
-    summary = ' '.join([list_sentences[closest[idx]] for idx in ordering])
-    st.write(summary)
+    summary = itemgetter(*closest)(sentences)
+    hasilRingkasan = []
+    for sent in summary:
+        a = ' '.join(sent)
+        hasilRingkasan.append(a)
+    st.write(hasilRingkasan)
+#     summary = ' '.join([list_sentences[closest[idx]] for idx in ordering])
+#     st.write(summary)
     
     
 # elif genre == 'compareMethod':
