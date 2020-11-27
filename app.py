@@ -13,6 +13,7 @@ from sklearn.cluster import MiniBatchKMeans
 from sklearn.metrics import pairwise_distances_argmin_min
 from gensim.models import Word2Vec
 from multiprocessing import Pool
+from rouge import Rouge 
 
 nltk.download('brown')
 
@@ -322,17 +323,14 @@ elif genre == 'compareMethod':
         a = ' '.join(sent)
         hasilRangkum.append(a)
         st.write(a)
-
         
-    st.subheader("Rouge Compare Parameter")
-    from rouge import Rouge 
+#     st.subheader("Rouge Compare Parameter")
+#     # hypothesis = summary_mn(3,vec(data,'w2v'))
+#     hypothesis = summary
+#     reference = hasilRangkum
 
-    # hypothesis = summary_mn(3,vec(data,'w2v'))
-    hypothesis = summary
-    reference = hasilRangkum
-
-    rouge = Rouge()
-    scores = rouge.get_scores(hypothesis, reference)
-    st.write(scores)
+#     rouge = Rouge()
+#     scores = rouge.get_scores(hypothesis, reference)
+#     st.write(scores)
     
     
