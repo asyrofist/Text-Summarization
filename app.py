@@ -231,7 +231,10 @@ elif genre == 'compareMethod':
 
     st.subheader("Summary Rank Result")
     summary = itemgetter(*selected_sentences)(sentences)
-    hasilSummary = ' '.join([[sent] for sent in summary]) 
+    hasilSummary = []
+    for sent in summary:
+        a = ' '.join(sent)
+        hasilSummary.append(a)
     st.write(hasilSummary)
     
     from rouge import Rouge 
