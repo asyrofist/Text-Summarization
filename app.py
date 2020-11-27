@@ -144,10 +144,10 @@ elif genre == 'wordembedRank':
     summary = itemgetter(*selected_sentences)(sentences)
 #     for sent in summary:
 #         st.write(' '.join(sent))
-    hasilSummary = [sent for sent in summary]
+    a = [sent for sent in summary]
+    st.write(' '.join(a))
     for sent in summary:
         st.write(' '.join(sent))
-    st.write(hasilSummary)
 elif genre == 'wordembedCluster':
     # Load word2vec pretrained
     st.sidebar.subheader("Word2vec Parameter")
