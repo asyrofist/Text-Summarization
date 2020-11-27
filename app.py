@@ -219,7 +219,7 @@ elif genre == 'compareMethod':
     st.write(summary)
     
     ringkasan = itemgetter(*ordering)(sentences)
-    hasilRingkasan = [' '.join(num) for sent in ringkasan]
+    hasilRingkasan = [' '.join(num) for num in ringkasan]
     st.write(hasilRingkasan)
     
     
