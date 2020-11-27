@@ -220,7 +220,7 @@ elif genre == 'compareMethod':
 #     ringkasan = ' '.join([sentences[closest[idx]] for idx in ordering])
     for idx in ordering:
         ringkasan = ' '.join(sentences[closest[idx]])
-        st.write(ringkasan)
+#         st.write(ringkasan)
     
     # Sentence Ranking
     col1, col2 = st.beta_columns([3, 1])
@@ -239,8 +239,8 @@ elif genre == 'compareMethod':
         st.write(' '.join(sent))
     
     from rouge import Rouge 
-    hypothesis = ("the #### transcript is a written version of each day 's cnn student news program use this transcript to he    lp students with reading comprehension and vocabulary use the weekly newsquiz to test your knowledge of storie s you     saw on cnn student news")
+    hypothesis = (hasilSummary)
     reference = (hasilSummary)
     rouge = Rouge()
     scores = rouge.get_scores(hypothesis, reference)
-    st.write(scores)
+    st.dataframe(scores)
