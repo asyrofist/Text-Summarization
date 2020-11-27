@@ -144,9 +144,8 @@ elif genre == 'wordembedRank':
     summary = itemgetter(*selected_sentences)(sentences)
 #     for sent in summary:
 #         st.write(' '.join(sent))
-    hasilSummary = []
+    hasilSummary = [sent for sent in summary]
     for sent in summary:
-        hasilSummary.append(sent)
         st.write(' '.join(sent))
     st.write(hasilSummary)
 elif genre == 'wordembedCluster':
