@@ -215,7 +215,7 @@ elif genre == 'compareMethod':
     ordering = sorted(range(n_clusters), key=lambda k: avg[k])
 
     st.subheader("Summary Result")
-    summary = ' '.join([list_sentences[closest[idx]] for idx in ordering])
+    summary = [' '.join([list_sentences[closest[idx]] for idx in ordering])]
     st.write(summary)
     
     # Sentence Ranking
