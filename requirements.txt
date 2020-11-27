@@ -5,3 +5,4 @@ gensim
 rouge
 nltk
 pywsd
+nltk.downloader popular
