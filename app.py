@@ -226,7 +226,7 @@ elif genre == 'compareMethod':
     st.write(summary)
     
     # Sentence Ranking
-    st.subheader("Sentence Ranking")
+#     st.subheader("Sentence Ranking")
     col1, col2 = st.beta_columns([3, 1])
     S = build_similarity_matrix(sentences)
 #     col1.write(S)
@@ -234,7 +234,7 @@ elif genre == 'compareMethod':
 #     col2.write(sentence_ranks)
     
     # Load Word Sense Disambiguation 
-    st.subheader("Index Sentence Ranking")
+#     st.subheader("Index Sentence Ranking")
 #     col3, col4 = st.beta_columns([3, 1])
     ranked_sentence_indexes = [item[0] for item in sorted(enumerate(sentence_ranks), key=lambda item: -item[1])]
 #     col3.dataframe(ranked_sentence_indexes)
@@ -243,8 +243,10 @@ elif genre == 'compareMethod':
     selected_sentences = sorted(ranked_sentence_indexes[:SUMMARY_SIZE])
 #     col4.dataframe(selected_sentences)
 
-    st.subheader("Summary Result")
+    st.subheader("Summary Rank Result")
     summary = itemgetter(*selected_sentences)(sentences)
+    hasilSummary = []
     for sent in summary:
+        hasilSummary.append(' '.join(sent))
         st.write(' '.join(sent))
-
+    
