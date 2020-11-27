@@ -88,7 +88,7 @@ def word_embedding(sen):
     return embeded
 
 st.sidebar.subheader("Method Parameter")
-genre = st.sidebar.radio("What's your Method",('TextRank', 'DisambiguationRank', 'DisambiguationCluster', 'wordembedRank', 'wordembedCluster', 'compareMethod'))
+genre = st.sidebar.radio("What's your Method",('TextRank', 'wordembedRank', 'wordembedCluster', 'compareMethod'))
 if genre == 'TextRank':
     st.subheader("Sentence Ranking")
     col1, col2 = st.beta_columns([3, 1])
@@ -225,21 +225,16 @@ elif genre == 'compareMethod':
     summary = ' '.join([list_sentences[closest[idx]] for idx in ordering])
     st.write(summary)
     
-#     st.subheader("Sentence Ranking based on Disamiguation")
-    # Load Word Sense Disambiguation 
-    disambiguation_df = []
-    for angka in range(0, len(list_sentences)):
-        a = [cosine_similarity(list_sentences[angka], list_sentences[num]) for num in range(0, len(list_sentences))]
-        disambiguation_df.append(a)      
-#     col1, col2 = st.beta_columns([3, 1])
-#     st.subheader("Sentence Ranking")
-    hasil_disambiguation = pd.DataFrame(disambiguation_df)
-#     col1.write(hasil_disambiguation)
-    sentence_ranks = pagerank(hasil_disambiguation)
+    # Sentence Ranking
+    st.subheader("Sentence Ranking")
+    col1, col2 = st.beta_columns([3, 1])
+    S = build_similarity_matrix(sentences)
+#     col1.write(S)
+    sentence_ranks = pagerank(S)
 #     col2.write(sentence_ranks)
     
     # Load Word Sense Disambiguation 
-#     st.subheader("Index Sentence Ranking")
+    st.subheader("Index Sentence Ranking")
 #     col3, col4 = st.beta_columns([3, 1])
     ranked_sentence_indexes = [item[0] for item in sorted(enumerate(sentence_ranks), key=lambda item: -item[1])]
 #     col3.dataframe(ranked_sentence_indexes)
@@ -248,21 +243,8 @@ elif genre == 'compareMethod':
     selected_sentences = sorted(ranked_sentence_indexes[:SUMMARY_SIZE])
 #     col4.dataframe(selected_sentences)
 
-    st.subheader("Summary DisambiguationRank Result")
-    rangkum = itemgetter(*selected_sentences)(sentences)
-    hasilRangkum = []
-    for sent in rangkum:
-        a = ' '.join(sent)
-        hasilRangkum.append(a)
-        st.write(a)
-        
-#     st.subheader("Rouge Compare Parameter")
-#     # hypothesis = summary_mn(3,vec(data,'w2v'))
-#     hypothesis = summary
-#     reference = hasilRangkum
+    st.subheader("Summary Result")
+    summary = itemgetter(*selected_sentences)(sentences)
+    for sent in summary:
+        st.write(' '.join(sent))
 
-#     rouge = Rouge()
-#     scores = rouge.get_scores(hypothesis, reference)
-#     st.write(scores)
-    
-    
