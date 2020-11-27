@@ -158,7 +158,7 @@ elif genre == 'wordembedCluster':
     unknown_embedd = np.zeros(300)
     
     st.sidebar.subheader("Cluster Parameter")
-    SUMMARY_SIZE = st.sidebar.slider("Berapa Jumlah Cluster?", 1, len(word_embedding(sentences)), 44)
+    SUMMARY_SIZE = st.sidebar.slider("Berapa Jumlah Cluster?", 1, len(word_embedding(sentences)), 20)
     avg = []
     n = SUMMARY_SIZE
     vector = embedd_vectors[:SUMMARY_SIZE]
@@ -178,15 +178,14 @@ elif genre == 'wordembedCluster':
     col6.dataframe(ordering)
 
     st.subheader("Summary Result")
-    summary = itemgetter(*ordering)(sentences)
-    hasilRingkasan = []
-    for sent in summary:
-        a = ' '.join(sent)
-        hasilRingkasan.append(a)
-    st.write(hasilRingkasan)
-#     summary = ' '.join([list_sentences[closest[idx]] for idx in ordering])
-#     st.write(summary)
-    
+#     summary = itemgetter(*ordering)(sentences)
+#     hasilRingkasan = []
+#     for sent in summary:
+#         a = ' '.join(sent)
+#         hasilRingkasan.append(a)
+#     st.write(hasilRingkasan)
+    summary = ' '.join([list_sentences[closest[idx]] for idx in ordering])
+    st.write(summary)
     
 # elif genre == 'compareMethod':
 #     # Load word2vec pretrained
