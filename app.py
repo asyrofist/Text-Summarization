@@ -178,7 +178,7 @@ elif genre == 'wordembedCluster':
     col6.dataframe(ordering)
 
     st.subheader("Summary Result")
-    summary = itemgetter(*closest)(sentences)
+    summary = itemgetter(*ordering)(sentences)
     hasilRingkasan = []
     for sent in summary:
         a = ' '.join(sent)
