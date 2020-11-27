@@ -5,4 +5,3 @@ streamlit
 pywsd
 sklearn
 gensim
-rouge
