@@ -215,10 +215,10 @@ elif genre == 'compareMethod':
     ordering = sorted(range(n_clusters), key=lambda k: avg[k])
 
     st.subheader("Summary Result Cluster")
-    summary = ' '.join([list_sentences[closest[idx]] for idx in ordering])
-    st.write(summary)
+#     summary = ' '.join([list_sentences[closest[idx]] for idx in ordering])
+#     st.write(summary)
     
-    ringkasan = itemgetter(*ordering)(sentences)
+    ringkasan = itemgetter(*closest)(sentences)
     hasilRingkasan = [' '.join(num) for num in ringkasan]
     st.write(hasilRingkasan)
     
