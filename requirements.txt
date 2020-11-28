@@ -6,3 +6,4 @@ rouge
 nltk
 pywsd
 requests
+wn==0.0.22
