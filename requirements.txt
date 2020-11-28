@@ -4,3 +4,4 @@ sklearn
 gensim
 rouge
 nltk
+pywsd == 12.0.0
