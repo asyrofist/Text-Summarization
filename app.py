@@ -12,6 +12,7 @@ from sklearn.metrics import pairwise_distances_argmin_min
 from gensim.models import Word2Vec
 from multiprocessing import Pool
 from pywsd.cosine import cosine_similarity
+from rouge import Rouge 
 
 nltk.download('brown')
 
@@ -309,7 +310,7 @@ elif genre == 'compareMethod':
     hasilSummary = [' '.join(sent) for sent in rangkuman]
     st.write(hasilSummary)
     
-    from rouge import Rouge 
+    # penilaian rouge
     hypothesis = (hasilRingkasan)
     reference = (hasilSummary)
     rouge = Rouge()
