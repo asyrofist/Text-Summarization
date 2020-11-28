@@ -21,13 +21,20 @@ st.set_page_config(
      page_title="Summarization",
 )
 
-st.sidebar.subheader("Dataset parameter")
-banyak_data = st.sidebar.slider("Berapa Dataset", 0, len(brown.fileids()), 10)
-dataset = st.sidebar.selectbox("Choose Brown Dataset?", brown.fileids()[:banyak_data])
-sentences = brown.sents(dataset)
+# st.sidebar.subheader("Dataset parameter")
+# banyak_data = st.sidebar.slider("Berapa Dataset", 0, len(brown.fileids()), 10)
+# dataset = st.sidebar.selectbox("Choose Brown Dataset?", brown.fileids()[:banyak_data])
+# sentences = brown.sents(dataset)
+# list_sentences = [' '.join(sent) for sent in sentences]
+# st.header("Summarization Corpus Brown")
+# st.dataframe(list_sentences)
+
+st.subheader("Corpus Parameter")
+text_dataset = st.text_area("Enter your Text", height=200, value = "Type Here", key="kalimat1")
+sentences = nltk.sent_tokenize(text_dataset)
 list_sentences = [' '.join(sent) for sent in sentences]
-st.header("Summarization Corpus Brown")
 st.dataframe(list_sentences)
+
 
 # Function
 def pagerank(M, eps=1.0e-8, d=0.85):
