@@ -264,7 +264,7 @@ elif genre == 'validation':
     message2 = st.text_area("Enter your Text", value = "Type Here", key="kalimat2")
     # penilaian rouge
     hypothesis = (message1)
-    reference = (message1)
+    reference = (message2)
     rouge = Rouge()
     scores = rouge.get_scores(hypothesis, reference)
     st.dataframe(scores)
