@@ -32,8 +32,8 @@ st.set_page_config(
 st.subheader("Corpus Parameter")
 text_dataset = st.text_area("Enter your Text", height=200, value = "Type Here", key="kalimat1")
 sentences = nltk.sent_tokenize(text_dataset)
-list_sentences = [' '.join(sent) for sent in sentences]
-st.dataframe(list_sentences)
+# list_sentences = [' '.join(sent) for sent in sentences]
+st.dataframe(sentences)
 
 
 # Function
@@ -104,7 +104,7 @@ genre = st.sidebar.radio("What's your Method",('TextRank', 'disambiguationRank',
 if genre == 'TextRank':
     st.subheader("Sentence Ranking")
     col1, col2 = st.beta_columns([3, 1])
-    S = build_similarity_matrix(list_sentences)
+    S = build_similarity_matrix(sentences)
     col1.write(S)
     sentence_ranks = pagerank(S)
     col2.write(sentence_ranks)
