@@ -259,9 +259,9 @@ elif genre == 'wordembedCluster':
     
 elif genre == 'validation':  
     st.subheader("Hypothesis")
-    message1 = st.text_area("Enter your Text", "Type Here")
+    message1 = st.text_area("Enter your Text", value = "Type Here", key=kalimat1)
     st.subheader("Reference")
-    message2 = st.text_area("Enter your Text", "Type Here")
+    message2 = st.text_area("Enter your Text", value = "Type Here", key=kalimat2)
     # penilaian rouge
     hypothesis = (message1)
     reference = (message1)
