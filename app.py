@@ -129,8 +129,8 @@ elif genre == 'disambiguationRank':
     st.subheader("Disambiguation Ranking")
     col1, col2 = st.beta_columns([3, 1])
     disambiguation_df = []
-    for angka in range(0, len(sentences)):
-        a = [cosine_similarity(sentences[angka], sentences[num]) for num in range(0, len(sentences))]
+    for angka in range(0, len(list_sentences)):
+        a = [cosine_similarity(list_sentences[angka], list_sentences[num]) for num in range(0, len(list_sentences))]
         disambiguation_df.append(a)      
 
     hasil_disambiguation = pd.DataFrame(disambiguation_df)
