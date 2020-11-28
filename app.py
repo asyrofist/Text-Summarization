@@ -150,7 +150,8 @@ elif genre == 'disambiguationCluster':
     hasil_disambiguation = pd.DataFrame(disambiguation_df)
     st.dataframe(hasil_disambiguation)
     vector = hasil_disambiguation
-    
+    SUMMARY_SIZE = st.sidebar.slider("Berapa Jumlah Cluster?", 1, len(list_sentences), 20)
+    n = SUMMARY_SIZE
     n_clusters = len(sentences)//n
     modelmn = MiniBatchKMeans(n_clusters=n_clusters) #minibatch
     modelmn = modelmn.fit(vector)
