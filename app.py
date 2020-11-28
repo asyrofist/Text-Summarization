@@ -139,7 +139,7 @@ elif genre == 'disambiguationRank':
     for sent in summary:
         st.write(' '.join(sent))        
 
-elif genre == 'wordembedCluster':
+elif genre == 'disambiguationCluster':
     # Load word2vec pretrained
     st.sidebar.subheader("Word2vec Parameter")
     disambiguation_df = []
