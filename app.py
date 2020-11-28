@@ -257,62 +257,14 @@ elif genre == 'wordembedCluster':
     summary = ' '.join([list_sentences[closest[idx]] for idx in ordering])
     st.write(summary)
     
-elif genre == 'compareMethod':
-    # Load word2vec pretrained
-    st.sidebar.subheader("Word2vec Parameter")
-    size_value = st.sidebar.slider("Berapa size?", 0, 200, len(sentences))
-    mode_value = st.sidebar.selectbox("Pilih Mode", [1, 0])
-    window_value = st.sidebar.slider("WIndows Size?", 0, 10, 3)
-    iteration_value = st.sidebar.slider("iteration size?", 0, 100, 10) 
-    word2vec_model = Word2Vec(sentences = sentences, size = size_value, sg = mode_value, window = window_value, min_count = 1, iter = iteration_value, workers = Pool()._processes)
-    word2vec_model.init_sims(replace = True)
-    embedd_vectors = word2vec_model.wv.vectors
-    unknown_embedd = np.zeros(300)
-    
-    st.sidebar.subheader("Cluster Parameter")
-    SUMMARY_SIZE = st.sidebar.slider("Berapa Jumlah Cluster?", 1, len(word_embedding(sentences)), 19)
-    avg = []
-    n = SUMMARY_SIZE
-    vector = embedd_vectors[:SUMMARY_SIZE]
-    n_clusters = len(sentences)//n
-    modelmn = MiniBatchKMeans(n_clusters=n_clusters) #minibatch
-    modelmn = modelmn.fit(vector)
-    for j in range(n_clusters):
-        idx = np.where(modelmn.labels_ == j)[0]
-        avg.append(np.mean(idx))
-    closest, _ = pairwise_distances_argmin_min(modelmn.cluster_centers_, vector)
-    ordering = sorted(range(n_clusters), key=lambda k: avg[k])
-
-    st.subheader("Summary wordembedCluster Result")
-#     summary = ' '.join([list_sentences[closest[idx]] for idx in ordering])
-#     st.write(summary)
-    
-    ringkasan = itemgetter(*closest)(sentences)
-    hasilRingkasan = [' '.join(num) for num in ringkasan]
-    st.write(hasilRingkasan)
-    
-    # Sentence Ranking
-    disambiguation_df = []
-    for angka in range(0, len(list_sentences)):
-        a = [cosine_similarity(list_sentences[angka], list_sentences[num]) for num in range(0, len(list_sentences))]
-        disambiguation_df.append(a)      
-
-    hasil_disambiguation = pd.DataFrame(disambiguation_df)
-    sentence_ranks = pagerank(hasil_disambiguation)
-    
-    # Load Word Sense Disambiguation 
-    ranked_sentence_indexes = [item[0] for item in sorted(enumerate(sentence_ranks), key=lambda item: -item[1])]
-    SUMMARY_SIZE = st.sidebar.slider("Berapa Jumlah Size?", 0, 10, 5)
-    selected_sentences = sorted(ranked_sentence_indexes[:SUMMARY_SIZE])
-
-    st.subheader("Summary DisambiguationRank Result")
-    rangkuman = itemgetter(*selected_sentences)(sentences)
-    hasilSummary = [' '.join(sent) for sent in rangkuman]
-    st.write(hasilSummary)
-    
+elif genre == 'compareMethod':  
+    st.subheader("Hypothesis")
+    message1 = st.text_area("Enter your Text", "Type Here")
+    st.subheader("Reference")
+    message2 = st.text_area("Enter your Text", "Type Here")
     # penilaian rouge
-    hypothesis = (hasilRingkasan)
-    reference = (hasilSummary)
+    hypothesis = (message1)
+    reference = (message1)
     rouge = Rouge()
     scores = rouge.get_scores(hypothesis, reference)
     st.dataframe(scores)
