@@ -148,7 +148,7 @@ elif genre == 'disambiguationRank':
     col4.dataframe(selected_sentences)
 
     st.subheader("Summary Result")
-    summary = itemgetter(*selected_sentences)(list_sentences)
+    summary = itemgetter(*selected_sentences)(sentences)
 #     hasilSummary = [' '.join(sent) for sent in summary]
     hasilSummary = (summary)
     st.write(hasilSummary)
