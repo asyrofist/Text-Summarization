@@ -88,7 +88,7 @@ def word_embedding(sen):
     return embeded
 
 st.sidebar.subheader("Method Parameter")
-genre = st.sidebar.radio("What's your Method",('TextRank', 'disambiguationRank', 'disambiguationCluster', 'wordembedRank', 'wordembedCluster', 'compareMethod'))
+genre = st.sidebar.radio("What's your Method",('TextRank', 'disambiguationRank', 'disambiguationCluster', 'wordembedRank', 'wordembedCluster', 'validation'))
 if genre == 'TextRank':
     st.subheader("Sentence Ranking")
     col1, col2 = st.beta_columns([3, 1])
@@ -257,7 +257,7 @@ elif genre == 'wordembedCluster':
     summary = ' '.join([list_sentences[closest[idx]] for idx in ordering])
     st.write(summary)
     
-elif genre == 'compareMethod':  
+elif genre == 'validation':  
     st.subheader("Hypothesis")
     message1 = st.text_area("Enter your Text", "Type Here")
     st.subheader("Reference")
