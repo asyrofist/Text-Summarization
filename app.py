@@ -120,7 +120,7 @@ if genre == 'TextRank':
     col4.dataframe(selected_sentences)
 
     st.subheader("Summary Result")
-    summary = itemgetter(*selected_sentences)(list_sentences)
+    summary = itemgetter(*selected_sentences)(sentences)
     for sent in summary:
         st.write(' '.join(sent))
 
