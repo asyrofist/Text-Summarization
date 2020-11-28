@@ -32,7 +32,7 @@ st.set_page_config(
 st.subheader("Corpus Parameter")
 text_dataset = st.text_area("Enter your Text", height=200, value = "Type Here", key="kalimat1")
 sentences = nltk.sent_tokenize(text_dataset)
-# list_sentences = [' '.join(sent) for sent in sentences]
+list_sentences = [' '.join(sent) for sent in sentences]
 st.dataframe(sentences)
 
 
@@ -148,7 +148,7 @@ elif genre == 'disambiguationRank':
     col4.dataframe(selected_sentences)
 
     st.subheader("Summary Result")
-    summary = itemgetter(*selected_sentences)(sentences)
+    summary = itemgetter(*selected_sentences)(list_sentences)
     for sent in summary:
         st.write(' '.join(sent))        
 
