@@ -8,6 +8,7 @@ from nltk.tokenize import TreebankWordTokenizer
 from operator import itemgetter
 from function import TextCleaner
 from sklearn.cluster import MiniBatchKMeans
+from sklearn.cluster import KMeans
 from sklearn.metrics import pairwise_distances_argmin_min
 from gensim.models import Word2Vec
 from multiprocessing import Pool
