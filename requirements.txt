@@ -4,6 +4,3 @@ sklearn
 gensim
 rouge
 nltk
-pywsd==1.2.4 
-requests==2.25.0 
-wn==0.1.1
