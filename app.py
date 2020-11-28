@@ -121,8 +121,9 @@ if genre == 'TextRank':
 
     st.subheader("Summary Result")
     summary = itemgetter(*selected_sentences)(sentences)
-    for sent in summary:
-        st.write(' '.join(sent))
+    st.write(summary)
+#     for sent in summary:
+#         st.write(' '.join(sent))
 
 elif genre == 'disambiguationRank':
     st.subheader("Disambiguation Ranking")
