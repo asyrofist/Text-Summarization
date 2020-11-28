@@ -33,9 +33,7 @@ st.subheader("Corpus Parameter")
 text_dataset = st.text_area("Enter your Text", height=200, value = "Type Here", key="kalimat1")
 sentences = nltk.sent_tokenize(text_dataset)
 list_sentences = [' '.join(sent) for sent in sentences]
-st.dataframe(text_dataset)
 st.dataframe(sentences)
-
 
 # Function
 def pagerank(M, eps=1.0e-8, d=0.85):
