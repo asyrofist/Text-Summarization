@@ -266,5 +266,6 @@ elif genre == 'validation':
     hypothesis = (message1)
     reference = (message2)
     rouge = Rouge()
+    st.subheader("Nilai Rouge Validation")
     scores = rouge.get_scores(hypothesis, reference)
     st.dataframe(scores)
