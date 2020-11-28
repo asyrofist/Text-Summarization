@@ -104,7 +104,7 @@ genre = st.sidebar.radio("What's your Method",('TextRank', 'disambiguationRank',
 if genre == 'TextRank':
     st.subheader("Sentence Ranking")
     col1, col2 = st.beta_columns([3, 1])
-    S = build_similarity_matrix(sentences)
+    S = build_similarity_matrix(list_sentences)
     col1.write(S)
     sentence_ranks = pagerank(S)
     col2.write(sentence_ranks)
@@ -120,7 +120,7 @@ if genre == 'TextRank':
     col4.dataframe(selected_sentences)
 
     st.subheader("Summary Result")
-    summary = itemgetter(*selected_sentences)(sentences)
+    summary = itemgetter(*selected_sentences)(list_sentences)
     for sent in summary:
         st.write(' '.join(sent))
 
