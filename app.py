@@ -163,7 +163,7 @@ elif genre == 'disambiguationCluster':
     modelkm = KMeans(n_clusters=n_clusters, init='k-means++')
     modelkm = modelkm.fit(vector)
     for j in range(n_clusters):
-        idx = np.where(modelmn.labels_ == j)[0]
+        idx = np.where(modelkm.labels_ == j)[0]
         avg.append(np.mean(idx))
     closest, _ = pairwise_distances_argmin_min(modelkm.cluster_centers_, vector)
     ordering = sorted(range(n_clusters), key=lambda k: avg[k])
