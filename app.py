@@ -149,9 +149,9 @@ elif genre == 'disambiguationRank':
 
     st.subheader("Summary Result")
     summary = itemgetter(*selected_sentences)(sentences)
-#     st.write(summary)
-    for sent in summary:
-        st.write(' '.join(sent))        
+    st.write(summary)
+#     for sent in summary:
+#         st.write(' '.join(sent))        
 
 elif genre == 'disambiguationCluster':
     # Load word2vec pretrained
