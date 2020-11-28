@@ -292,19 +292,31 @@ elif genre == 'compareMethod':
     
     
     # Sentence Ranking
-    vector = [word_embedding(sentences[i]) for i in range(len(sentences))]
-    vector_df = pd.DataFrame(vector)
-    sentence_ranks = pagerank(vector_df)
+    st.subheader("Disambiguation Ranking")
+    col1, col2 = st.beta_columns([3, 1])
+    disambiguation_df = []
+    for angka in range(0, len(list_sentences)):
+        a = [cosine_similarity(list_sentences[angka], list_sentences[num]) for num in range(0, len(list_sentences))]
+        disambiguation_df.append(a)      
+
+    hasil_disambiguation = pd.DataFrame(disambiguation_df)
+    col1.write(hasil_disambiguation)
+    sentence_ranks = pagerank(hasil_disambiguation)
+    col2.write(sentence_ranks)
     
-    st.sidebar.subheader("Rank Parameter")
+    # Load Word Sense Disambiguation 
+    st.subheader("Index Sentence Ranking")
+    col3, col4 = st.beta_columns([3, 1])
     ranked_sentence_indexes = [item[0] for item in sorted(enumerate(sentence_ranks), key=lambda item: -item[1])]
+    col3.dataframe(ranked_sentence_indexes)
+    st.sidebar.subheader("Summary Parameter")
     SUMMARY_SIZE = st.sidebar.slider("Berapa Jumlah Size?", 0, 10, 5)
     selected_sentences = sorted(ranked_sentence_indexes[:SUMMARY_SIZE])
+    col4.dataframe(selected_sentences)
 
-    st.subheader("Summary Result Rank")
+    st.subheader("Summary Result")
     rangkuman = itemgetter(*selected_sentences)(sentences)
     hasilSummary = [' '.join(sent) for sent in rangkuman]
-    st.write(hasilSummary)
     
     from rouge import Rouge 
     hypothesis = (hasilRingkasan)
