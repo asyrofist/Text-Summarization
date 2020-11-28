@@ -16,6 +16,10 @@ from rouge import Rouge
 
 nltk.download('brown')
 
+st.set_page_config(
+     page_title="Summarization",
+)
+
 st.sidebar.subheader("Dataset parameter")
 banyak_data = st.sidebar.slider("Berapa Dataset", 0, len(brown.fileids()), 10)
 dataset = st.sidebar.selectbox("Choose Brown Dataset?", brown.fileids()[:banyak_data])
