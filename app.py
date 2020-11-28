@@ -282,14 +282,13 @@ elif genre == 'compareMethod':
     closest, _ = pairwise_distances_argmin_min(modelmn.cluster_centers_, vector)
     ordering = sorted(range(n_clusters), key=lambda k: avg[k])
 
-    st.subheader("Summary Result Cluster")
+    st.subheader("Summary wordembedCluster Result")
 #     summary = ' '.join([list_sentences[closest[idx]] for idx in ordering])
 #     st.write(summary)
     
     ringkasan = itemgetter(*closest)(sentences)
     hasilRingkasan = [' '.join(num) for num in ringkasan]
     st.write(hasilRingkasan)
-    
     
     # Sentence Ranking
     disambiguation_df = []
@@ -305,7 +304,7 @@ elif genre == 'compareMethod':
     SUMMARY_SIZE = st.sidebar.slider("Berapa Jumlah Size?", 0, 10, 5)
     selected_sentences = sorted(ranked_sentence_indexes[:SUMMARY_SIZE])
 
-    st.subheader("Summary Result")
+    st.subheader("Summary DisambiguationRank Result")
     rangkuman = itemgetter(*selected_sentences)(sentences)
     hasilSummary = [' '.join(sent) for sent in rangkuman]
     st.write(hasilSummary)
