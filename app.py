@@ -218,8 +218,9 @@ elif genre == 'disambiguationCluster':
     disambiguation_df = []
     for angka in range(0, len(sentences)):
         a = [cosine_similarity(sentences[angka], sentences[num]) for num in range(0, len(sentences))]
-        disambiguation_df.append(a)      
-
+        disambiguation_df.append(a)
+          
+    st.subheader("Disambiguation Parameter")
     hasil_disambiguation = pd.DataFrame(disambiguation_df)
     st.dataframe(hasil_disambiguation)
     vector = hasil_disambiguation
