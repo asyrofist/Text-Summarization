@@ -29,11 +29,6 @@ st.set_page_config(
 # st.header("Summarization Corpus Brown")
 # st.dataframe(list_sentences)
 
-st.subheader("Corpus Parameter")
-text_dataset = st.text_area("Enter your Text", height=200, value = "Type Here", key="kalimatutama")
-sentences = nltk.sent_tokenize(text_dataset)
-st.dataframe(sentences)
-
 # Function
 def pagerank(M, eps=1.0e-8, d=0.85):
     N = M.shape[1]
@@ -97,6 +92,56 @@ def word_embedding(sen):
             embeded = embeded + unknown_embedd
     return embeded
 
+# cleaning text
+def apply_cleaning_function_to_list(X):
+    cleaned_X = []
+    for element in X:
+        cleaned_X.append(clean_text(element))
+    return cleaned_X
+
+def clean_text(raw_text):
+    """This function works on a raw text string, and:
+        1) changes to lower case
+        2) tokenizes (breaks down into words
+        3) removes punctuation and non-word text
+        4) finds word stems
+        5) removes stop words
+        6) rejoins meaningful stem words"""
+    
+    # Convert to lower case
+    text = raw_text.lower()
+    
+    # Tokenize
+    tokens = nltk.word_tokenize(text)
+    
+    # Keep only words (removes punctuation + numbers)
+    # use .isalnum to keep also numbers
+    token_words = [w for w in tokens if w.isalpha()]
+    
+    # # Stemming
+    # stemmed_words = [stemming.stem(w) for w in token_words]
+
+    # Lemmatization
+    lemma_words = [lem.lemmatize(w) for w in token_words]
+    
+    # Remove stop words
+    meaningful_words = [w for w in lemma_words if not w in stops]
+    
+
+    # Rejoin meaningful stemmed words
+    joined_words = ( " ".join(meaningful_words))
+    
+    # Return cleaned data
+    return joined_words
+
+st.subheader("Corpus Parameter")
+text_dataset = st.text_area("Enter your Text", height=200, value = "Type Here", key="kalimatutama")
+sentences = nltk.sent_tokenize(text_dataset)
+st.dataframe(sentences)
+# Cleaning Text
+text_to_clean = list(sentences)
+cleaned_text = apply_cleaning_function_to_list(text_to_clean)
+
 st.sidebar.subheader("Method Parameter")
 genre = st.sidebar.radio("What's your Method",('TextRank', 'disambiguationRank', 'disambiguationCluster', 'wordembedRank', 'wordembedCluster', 'validation'))
 if genre == 'TextRank':
@@ -125,10 +170,11 @@ if genre == 'TextRank':
 
 elif genre == 'disambiguationRank':
     st.subheader("Disambiguation Ranking")
+    
     col1, col2 = st.beta_columns([3, 1])
     disambiguation_df = []
-    for angka in range(0, len(sentences)):
-        a = [cosine_similarity(sentences[angka], sentences[num]) for num in range(0, len(sentences))]
+    for angka in range(0, len(cleaned_text)):
+        a = [cosine_similarity(cleaned_text[angka], cleaned_text[num]) for num in range(0, len(cleaned_text))]
         disambiguation_df.append(a)      
 
     hasil_disambiguation = pd.DataFrame(disambiguation_df)
@@ -157,8 +203,8 @@ elif genre == 'disambiguationCluster':
     # Load word2vec pretrained
     st.sidebar.subheader("Word2vec Parameter")
     disambiguation_df = []
-    for angka in range(0, len(sentences)):
-        a = [cosine_similarity(sentences[angka], sentences[num]) for num in range(0, len(sentences))]
+    for angka in range(0, len(cleaned_text)):
+        a = [cosine_similarity(cleaned_text[angka], cleaned_text[num]) for num in range(0, len(cleaned_text))]
         disambiguation_df.append(a)      
 
     hasil_disambiguation = pd.DataFrame(disambiguation_df)
@@ -199,7 +245,7 @@ elif genre == 'wordembedRank':
     mode_value = st.sidebar.selectbox("Pilih Mode", [1, 0])
     window_value = st.sidebar.slider("WIndows Size?", 0, 10, 3)
     iteration_value = st.sidebar.slider("iteration size?", 0, 100, 10) 
-    word2vec_model = Word2Vec(sentences = sentences, size = size_value, sg = mode_value, window = window_value, min_count = 1, iter = iteration_value, workers = Pool()._processes)
+    word2vec_model = Word2Vec(sentences = cleaned_text, size = size_value, sg = mode_value, window = window_value, min_count = 1, iter = iteration_value, workers = Pool()._processes)
     word2vec_model.init_sims(replace = True)
     embedd_vectors = word2vec_model.wv.vectors
     
@@ -239,7 +285,7 @@ elif genre == 'wordembedCluster':
     mode_value = st.sidebar.selectbox("Pilih Mode", [1, 0])
     window_value = st.sidebar.slider("WIndows Size?", 0, 10, 3)
     iteration_value = st.sidebar.slider("iteration size?", 0, 100, 10) 
-    word2vec_model = Word2Vec(sentences = sentences, size = size_value, sg = mode_value, window = window_value, min_count = 1, iter = iteration_value, workers = Pool()._processes)
+    word2vec_model = Word2Vec(sentences = cleaned_text, size = size_value, sg = mode_value, window = window_value, min_count = 1, iter = iteration_value, workers = Pool()._processes)
     word2vec_model.init_sims(replace = True)
     embedd_vectors = word2vec_model.wv.vectors
     unknown_embedd = np.zeros(300)
