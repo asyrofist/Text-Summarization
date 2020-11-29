@@ -137,7 +137,6 @@ def clean_text(raw_text):
     
     # Remove stop words
     meaningful_words = [w for w in lemma_words if not w in stops]
-    
 
     # Rejoin meaningful stemmed words
     joined_words = ( " ".join(meaningful_words))
@@ -171,7 +170,7 @@ if genre == 'TextRank':
     ranked_sentence_indexes = [item[0] for item in sorted(enumerate(sentence_ranks), key=lambda item: -item[1])]
     col3.dataframe(ranked_sentence_indexes)
     st.sidebar.subheader("Summary Parameter")
-    SUMMARY_SIZE = st.sidebar.slider("Berapa Jumlah Size?", 0, 10, 5)
+    SUMMARY_SIZE = st.sidebar.slider("Berapa Jumlah Size?", 0, len(ranked_sentence_indexes), 5)
     selected_sentences = sorted(ranked_sentence_indexes[:SUMMARY_SIZE])
     col4.dataframe(selected_sentences)
 
@@ -186,8 +185,8 @@ elif genre == 'disambiguationRank':
     
     col1, col2 = st.beta_columns([3, 1])
     disambiguation_df = []
-    for angka in range(0, len(sentences)):
-        a = [cosine_similarity(sentences[angka], sentences[num]) for num in range(0, len(sentences))]
+    for angka in range(0, len(cleaned_text)):
+        a = [cosine_similarity(cleaned_text[angka], cleaned_text[num]) for num in range(0, len(cleaned_text))]
         disambiguation_df.append(a)      
 
     hasil_disambiguation = pd.DataFrame(disambiguation_df)
@@ -201,7 +200,7 @@ elif genre == 'disambiguationRank':
     col3.subheader("Index Sentence")
     col3.dataframe(ranked_sentence_indexes)
     st.sidebar.subheader("Summary Parameter")
-    SUMMARY_SIZE = st.sidebar.slider("Berapa Jumlah Size?", 0, 10, 5)
+    SUMMARY_SIZE = st.sidebar.slider("Berapa Jumlah Size?", 0, len(ranked_sentence_indexes), 5)
     selected_sentences = sorted(ranked_sentence_indexes[:SUMMARY_SIZE])
     col4.subheader("Sentence Rank")
     col4.dataframe(selected_sentences)
@@ -217,8 +216,8 @@ elif genre == 'disambiguationCluster':
     # Load word2vec pretrained
     st.sidebar.subheader("Word2vec Parameter")
     disambiguation_df = []
-    for angka in range(0, len(sentences)):
-        a = [cosine_similarity(sentences[angka], sentences[num]) for num in range(0, len(sentences))]
+    for angka in range(0, len(cleaned_text)):
+        a = [cosine_similarity(cleaned_text[angka], cleaned_text[num]) for num in range(0, len(cleaned_text))]
         disambiguation_df.append(a)
           
     st.subheader("Disambiguation Parameter")
