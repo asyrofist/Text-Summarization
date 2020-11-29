@@ -97,6 +97,11 @@ def word_embedding(sen):
             embeded = embeded + unknown_embedd
     return embeded
 
+def round_int(x):
+    if x == float("inf") or x == float("-inf"):
+        return float('nan') # or x or return whatever makes sense
+    return int(round(x))
+
 st.sidebar.subheader("Method Parameter")
 genre = st.sidebar.radio("What's your Method",('TextRank', 'disambiguationRank', 'disambiguationCluster', 'wordembedRank', 'wordembedCluster', 'validation'))
 if genre == 'TextRank':
@@ -162,7 +167,7 @@ elif genre == 'disambiguationCluster':
 
     hasil_disambiguation = pd.DataFrame(disambiguation_df)
     st.dataframe(hasil_disambiguation)
-    vector = disambiguation_df
+    vector = round_int(disambiguation_df)
     SUMMARY_SIZE = st.sidebar.slider("Berapa Jumlah Cluster?", 1, len(sentences), 20)
     n = SUMMARY_SIZE
     avg = []
