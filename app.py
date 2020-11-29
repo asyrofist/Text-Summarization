@@ -186,8 +186,8 @@ elif genre == 'disambiguationRank':
     
     col1, col2 = st.beta_columns([3, 1])
     disambiguation_df = []
-    for angka in range(0, len(cleaned_text)):
-        a = [cosine_similarity(cleaned_text[angka], cleaned_text[num]) for num in range(0, len(cleaned_text))]
+    for angka in range(0, len(sentences)):
+        a = [cosine_similarity(sentences[angka], sentences[num]) for num in range(0, len(sentences))]
         disambiguation_df.append(a)      
 
     hasil_disambiguation = pd.DataFrame(disambiguation_df)
@@ -216,8 +216,8 @@ elif genre == 'disambiguationCluster':
     # Load word2vec pretrained
     st.sidebar.subheader("Word2vec Parameter")
     disambiguation_df = []
-    for angka in range(0, len(cleaned_text)):
-        a = [cosine_similarity(cleaned_text[angka], cleaned_text[num]) for num in range(0, len(cleaned_text))]
+    for angka in range(0, len(sentences)):
+        a = [cosine_similarity(sentences[angka], sentences[num]) for num in range(0, len(sentences))]
         disambiguation_df.append(a)      
 
     hasil_disambiguation = pd.DataFrame(disambiguation_df)
