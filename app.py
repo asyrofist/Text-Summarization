@@ -223,7 +223,7 @@ elif genre == 'disambiguationCluster':
     hasil_disambiguation = pd.DataFrame(disambiguation_df)
     st.dataframe(hasil_disambiguation)
     vector = hasil_disambiguation
-    SUMMARY_SIZE = st.sidebar.slider("Berapa Jumlah Cluster?", 1, len(sentences), len(sentences)//2)
+    SUMMARY_SIZE = st.sidebar.slider("Berapa Jumlah Cluster?", 1, len(sentences), len(sentences)//3)
     n = SUMMARY_SIZE
     avg = []
     n_clusters = len(sentences)//n
