@@ -4,6 +4,7 @@ import pandas as pd
 import nltk
 from nltk.corpus import brown
 from nltk.cluster.util import cosine_distance
+from nltk.stem import PorterStemmer
 from nltk.tokenize import TreebankWordTokenizer
 from nltk.stem.wordnet import WordNetLemmatizer
 from nltk.corpus import stopwords
