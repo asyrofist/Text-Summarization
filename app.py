@@ -146,14 +146,14 @@ def clean_text(raw_text):
     return joined_words
 
 st.subheader("Corpus Parameter")
-colutama, colkedua = st.beta_columns([2, 2])
 text_dataset = st.text_area("Enter your Text", height=200, value = "Type Here", key="kalimatutama")
+# colutama, colkedua = st.beta_columns([2, 2])
 sentences = nltk.sent_tokenize(text_dataset)
-colutama.dataframe(sentences)
+st.dataframe(sentences)
 # Cleaning Text
 text_to_clean = list(sentences)
 cleaned_text = apply_cleaning_function_to_list(text_to_clean)
-colkedua.dataframe(cleaned_text)
+# colkedua.dataframe(cleaned_text)
 
 st.sidebar.subheader("Method Parameter")
 genre = st.sidebar.radio("What's your Method",('TextRank', 'disambiguationRank', 'disambiguationCluster', 'wordembedRank', 'wordembedCluster', 'validation'))
