@@ -301,7 +301,7 @@ elif genre == 'wordembedCluster':
     mode_value = st.sidebar.selectbox("Pilih Mode", [1, 0])
     window_value = st.sidebar.slider("WIndows Size?", 0, 10, 3)
     iteration_value = st.sidebar.slider("iteration size?", 0, 100, 10) 
-    word2vec_model = Word2Vec(sentences = sentences, size = size_value, sg = mode_value, window = window_value, min_count = 1, iter = iteration_value, workers = Pool()._processes)
+    word2vec_model = Word2Vec(sentences = cleaned_text, size = size_value, sg = mode_value, window = window_value, min_count = 1, iter = iteration_value, workers = Pool()._processes)
     word2vec_model.init_sims(replace = True)
     embedd_vectors = word2vec_model.wv.vectors
     unknown_embedd = np.zeros(300)
