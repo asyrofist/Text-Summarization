@@ -148,7 +148,8 @@ elif genre == 'disambiguationRank':
 
     st.subheader("Summary Result")
     summary = itemgetter(*selected_sentences)(sentences)
-    st.write(summary)
+#     st.write(summary)
+    st.write(' '.join(summary))
 #     for sent in summary:
 #         st.write(' '.join(sent))        
 
@@ -224,7 +225,8 @@ elif genre == 'wordembedRank':
 
     st.subheader("Summary Result")
     summary = itemgetter(*selected_sentences)(sentences)
-    st.write(summary)
+#     st.write(summary)
+    st.write(' '.join(summary))
 #     hasilSummary = [' '.join(sent) for sent in summary]
 #     st.write(hasilSummary)
 #     for sent in summary:
