@@ -32,7 +32,6 @@ st.set_page_config(
 st.subheader("Corpus Parameter")
 text_dataset = st.text_area("Enter your Text", height=200, value = "Type Here", key="kalimat1")
 sentences = nltk.sent_tokenize(text_dataset)
-list_sentences = [' '.join(sent) for sent in sentences]
 st.dataframe(sentences)
 
 # Function
@@ -164,7 +163,7 @@ elif genre == 'disambiguationCluster':
     hasil_disambiguation = pd.DataFrame(disambiguation_df)
     st.dataframe(hasil_disambiguation)
     vector = hasil_disambiguation
-    SUMMARY_SIZE = st.sidebar.slider("Berapa Jumlah Cluster?", 1, len(list_sentences), 20)
+    SUMMARY_SIZE = st.sidebar.slider("Berapa Jumlah Cluster?", 1, len(sentences), 20)
     n = SUMMARY_SIZE
     avg = []
     n_clusters = len(sentences)//n
