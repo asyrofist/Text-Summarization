@@ -30,7 +30,7 @@ st.set_page_config(
 # st.dataframe(list_sentences)
 
 st.subheader("Corpus Parameter")
-text_dataset = st.text_area("Enter your Text", height=200, value = "Type Here", key="kalimat1")
+text_dataset = st.text_area("Enter your Text", height=200, value = "Type Here", key="kalimatutama")
 sentences = nltk.sent_tokenize(text_dataset)
 st.dataframe(sentences)
 
