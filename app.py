@@ -148,7 +148,6 @@ def clean_text(raw_text):
 st.subheader("Corpus Parameter")
 text_dataset = st.text_area("Enter your Text", height=200, value = "Type Here", key="kalimatutama")
 # colutama, colkedua = st.beta_columns([2, 2])
-text_dataset = text_dataset.lower()
 sentences = nltk.sent_tokenize(text_dataset)
 st.dataframe(sentences)
 # Cleaning Text
