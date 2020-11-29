@@ -187,7 +187,8 @@ elif genre == 'disambiguationCluster':
 #         a = ' '.join(sent)
 #         hasilRingkasan.append(a)
 #     st.write(hasilRingkasan)
-    summary = ' '.join([list_sentences[closest[idx]] for idx in ordering])
+#     summary = ' '.join([list_sentences[closest[idx]] for idx in ordering])
+    summary = [list_sentences[closest[idx]] for idx in ordering]
     st.write(summary)
         
 elif genre == 'wordembedRank':
