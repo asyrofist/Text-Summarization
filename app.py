@@ -294,7 +294,7 @@ elif genre == 'wordembedRank':
 elif genre == 'wordembedCluster':
     # Load word2vec pretrained
     st.sidebar.subheader("Word2vec Parameter")
-    size_value = st.sidebar.slider("Berapa size?", 0, 200, len(sentences))
+    size_value = st.sidebar.slider("Berapa size?", 0, 200, len(cleaned_text))
     mode_value = st.sidebar.selectbox("Pilih Mode", [1, 0])
     window_value = st.sidebar.slider("WIndows Size?", 0, 10, 3)
     iteration_value = st.sidebar.slider("iteration size?", 0, 100, 10) 
