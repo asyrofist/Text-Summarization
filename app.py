@@ -248,7 +248,7 @@ elif genre == 'wordembedCluster':
     unknown_embedd = np.zeros(300)
     
     st.sidebar.subheader("Cluster Parameter")
-    SUMMARY_SIZE = st.sidebar.slider("Berapa Jumlah Cluster?", 1, len(word_embedding(sentences)), 20)
+    SUMMARY_SIZE = st.sidebar.slider("Berapa Jumlah Cluster?", 1, len(word_embedding(sentences)), len(word_embedding(sentences))//2)
     avg = []
     n = SUMMARY_SIZE
     vector = embedd_vectors[:size_value]
