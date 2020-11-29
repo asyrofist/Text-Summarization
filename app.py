@@ -5,6 +5,9 @@ import nltk
 from nltk.corpus import brown
 from nltk.cluster.util import cosine_distance
 from nltk.tokenize import TreebankWordTokenizer
+from nltk.stem.wordnet import WordNetLemmatizer
+from nltk.corpus import stopwords
+from nltk.tokenize import word_tokenize 
 from operator import itemgetter
 from function import TextCleaner
 from sklearn.cluster import MiniBatchKMeans
@@ -16,6 +19,13 @@ from pywsd.cosine import cosine_similarity
 from rouge import Rouge 
 
 # nltk.download('brown')
+nltk.download('stopwords')
+nltk.download('punkt')
+nltk.download('wordnet')
+
+stemming = PorterStemmer()
+stops = set(stopwords.words("english"))
+lem = WordNetLemmatizer()
 
 st.set_page_config(
      page_title="Summarization",
