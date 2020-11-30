@@ -345,7 +345,7 @@ elif genre == 'wordembedCluster':
     
 elif genre == 'validation':  
     st.subheader("Hypothesis")
-    message1 = st.text_area("Enter your Text", height=200, value = "Tulis Text", key="kalimat1")
+    message1 = st.text_area("Enter your Text", height=200, value = pilihanDataset, key="kalimat1")
     st.subheader("Reference")
     pilihanGroundtruth = st.selectbox("Pilih Dataset?", text_dataset['Ground Truth'])
     message2 = st.text_area("Enter your Text", height=200, value = pilihanGroundtruth, key="kalimat2")
