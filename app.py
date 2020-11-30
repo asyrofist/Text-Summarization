@@ -282,7 +282,7 @@ elif genre == 'wordembedRank':
     col3.subheader("Index Sentence")
     col3.dataframe(ranked_sentence_indexes)
     st.sidebar.subheader("Summary Parameter")
-    SUMMARY_SIZE = st.sidebar.slider("Berapa Jumlah Size?", 0, len(sentences), len(sentences)//2)
+    SUMMARY_SIZE = st.sidebar.slider("Berapa Jumlah Size?", 0, len(sentences), len(sentences)//3)
     selected_sentences = sorted(ranked_sentence_indexes[:SUMMARY_SIZE])
     col4.subheader("Sentence Rank")
     col4.dataframe(selected_sentences)
