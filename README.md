@@ -1,5 +1,4 @@
 # Text-Summarization
-Text Summzaization of Brown Corpus
 This is [live Demo](https://share.streamlit.io/asyrofist/text-summarization/app.py) for text summarization
 ![Example of live coding an app in Streamlit|635x380](https://github.com/asyrofist/Text-Summarization/blob/master/simulate_sum.gif)
 Automatic summarization is the process of shortening a text document with software, in order to create a summary with the major points of the original document. Technologies that can make a coherent summary take into account variables such as length, writing style and syntax.
