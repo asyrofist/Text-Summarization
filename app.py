@@ -149,7 +149,7 @@ st.subheader("Corpus Parameter")
 import pandas as pd
 text_dataset = pd.read_excel('GroundTruth.xlsx')
 st.write(text_dataset)
-pilihanDataset = st.selectbox("Pilih Dataset?", text_dataset)
+pilihanDataset = st.selectbox("Pilih Dataset?", text_dataset['Raw File'])
 colutama, colkedua = st.beta_columns([2, 2])
 sentences = nltk.sent_tokenize(pilihanDataset)
 colutama.subheader("Dataset")
