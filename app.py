@@ -148,10 +148,10 @@ st.subheader("Corpus Parameter")
 # text_dataset = st.text_area("Enter your Text", height=200, value = "Type Here", key="kalimatutama")
 import pandas as pd
 text_dataset = pd.read_excel('GroundTruth.xlsx')
-st.write(text_dataset['Raw File']['Ground Truth'])
-pilihanDataset = st.selectbox("Pilih Dataset?", text_dataset['No.'])
+st.write(text_dataset)
+pilihanDataset = st.selectbox("Pilih Dataset?", text_dataset)
 colutama, colkedua = st.beta_columns([2, 2])
-sentences = nltk.sent_tokenize(pilihanDataset)
+sentences = nltk.sent_tokenize(pilihanDataset['Raw File'])
 colutama.subheader("Dataset")
 colutama.dataframe(sentences)
 # Cleaning Text
