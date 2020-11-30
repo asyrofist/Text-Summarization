@@ -145,9 +145,13 @@ def clean_text(raw_text):
     return joined_words
 
 st.subheader("Corpus Parameter")
-text_dataset = st.text_area("Enter your Text", height=200, value = "Type Here", key="kalimatutama")
+# text_dataset = st.text_area("Enter your Text", height=200, value = "Type Here", key="kalimatutama")
+import pandas as pd
+text_dataset = pd.read_excel('/content/GroundTruth.xlsx')
+st.write(text_dataset)
+pilihanDataset = st.selectbox("Pilih Dataset?", text_dataset['Raw File'])
 colutama, colkedua = st.beta_columns([2, 2])
-sentences = nltk.sent_tokenize(text_dataset)
+sentences = nltk.sent_tokenize(pilihanDataset)
 colutama.subheader("Dataset")
 colutama.dataframe(sentences)
 # Cleaning Text
