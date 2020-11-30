@@ -267,7 +267,6 @@ elif genre == 'wordembedRank':
     embedd_vectors = word2vec_model.wv.vectors
     
     col1, col2 = st.beta_columns([3, 1])
-    st.subheader("Sentence Ranking")
     vector = embedd_vectors[:size_value]
 #     vector = embedd_vectors
 #     vector = [word_embedding(sentences[i]) for i in range(len(sentences))]
