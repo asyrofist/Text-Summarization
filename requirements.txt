@@ -7,5 +7,4 @@ nltk
 pywsd
 wn==0.0.22
 xlrd
-https://github.com/asyrofist/Text-Summarization/tree/master/bertSum
-torch==1.0.1
+bert-extractive-summarizer
