@@ -7,5 +7,5 @@ nltk
 pywsd
 wn==0.0.22
 xlrd
-https://github.com/asyrofist/bert-extractive-summarizer
+https://github.com/asyrofist/bert-extractive-summarizer.git
 torch==1.0.1
