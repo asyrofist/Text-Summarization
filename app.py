@@ -18,6 +18,8 @@ from gensim.models import Word2Vec
 from multiprocessing import Pool
 from pywsd.cosine import cosine_similarity
 from rouge import Rouge 
+from time import time
+start = time()
 
 # nltk.download('brown')
 nltk.download('stopwords')
@@ -152,6 +154,8 @@ st.write(text_dataset)
 pilihanDataset = st.selectbox("Pilih Dataset?", text_dataset['Raw File'])
 colutama, colkedua = st.beta_columns([2, 2])
 sentences = nltk.sent_tokenize(pilihanDataset)
+timepros = time() - start
+
 colutama.subheader("Dataset")
 colutama.dataframe(sentences)
 # Cleaning Text
@@ -183,6 +187,8 @@ if genre == 'TextRank':
     st.subheader("Summary Result")
     summary = itemgetter(*selected_sentences)(sentences)
     st.write(' '.join(summary))
+    st.write("Waktu {} detik".format(timepros))
+
 #     for sent in summary:
 #         st.write(' '.join(sent))
 
@@ -214,7 +220,10 @@ elif genre == 'disambiguationRank':
     st.subheader("Summary Result")
     summary = itemgetter(*selected_sentences)(sentences)
 #     st.write(summary)
+    timepros = time() - start
     st.write(' '.join(summary))
+    st.write("Waktu {} detik".format(timepros))
+
 #     for sent in summary:
 #         st.write(' '.join(sent))        
 
@@ -256,7 +265,9 @@ elif genre == 'disambiguationCluster':
 #     st.write(hasilRingkasan)
 #     summary = ' '.join([list_sentences[closest[idx]] for idx in ordering])
     summary = ' '.join([sentences[closest[idx]] for idx in ordering])
+    timepros = time() - start
     st.write(summary)
+    st.write("Waktu {} detik".format(timepros))
         
 elif genre == 'wordembedRank':
     st.subheader("Sentence Ranking based on WordEmbedding")
@@ -293,7 +304,10 @@ elif genre == 'wordembedRank':
     st.subheader("Summary Result")
     summary = itemgetter(*selected_sentences)(sentences)
 #     st.write(summary)
+    timepros = time() - start
     st.write(' '.join(summary))
+    st.write("Waktu {} detik".format(timepros))
+
 #     hasilSummary = [' '.join(sent) for sent in summary]
 #     st.write(hasilSummary)
 #     for sent in summary:
@@ -340,8 +354,11 @@ elif genre == 'wordembedCluster':
 #         hasilRingkasan.append(a)
 #     st.write(hasilRingkasan)
 #     summary = ' '.join([list_sentences[closest[idx]] for idx in ordering])
+    timepros = time() - start
     summary = ' '.join([sentences[closest[idx]] for idx in ordering])
     st.write(summary)
+    st.write("Waktu {} detik".format(timepros))
+
 
 elif genre == 'validation':  
     st.subheader("Hypothesis")
