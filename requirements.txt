@@ -8,4 +8,5 @@ pywsd
 wn==0.0.22
 xlrd
 bert-extractive-summarizer
-mkl
+torch==1.6.0 
+torchvision==0.7.0
