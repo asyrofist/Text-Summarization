@@ -344,12 +344,16 @@ elif genre == 'wordembedCluster':
     st.write(summary)
 
 elif genre == 'BERTSum':  
-    from summarizer import Summarizer
-#     from summarizer import TransformerSummarizer 
-    bert_model = Summarizer()
+#     from summarizer import Summarizer
+#     bert_model = Summarizer()
+#     body = sentences
+#     bert_summary = ''.join(bert_model(body, min_length=60))
+#     st.write(bert_summary)
+    from summarizer import TransformerSummarizer 
+    GPT2_model = TransformerSummarizer(transformer_type="GPT2",transformer_model_key="gpt2-medium")
     body = sentences
-    bert_summary = ''.join(bert_model(body, min_length=60))
-    st.write(bert_summary)
+    full = ''.join(GPT2_model(body, min_length=60))
+    st.write(full)
 
 elif genre == 'validation':  
     st.subheader("Hypothesis")
