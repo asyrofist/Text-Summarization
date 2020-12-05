@@ -161,7 +161,7 @@ colkedua.subheader("cleaned")
 colkedua.dataframe(cleaned_text)
 
 st.sidebar.subheader("Method Parameter")
-genre = st.sidebar.radio("What's your Method",('TextRank', 'disambiguationRank', 'disambiguationCluster', 'wordembedRank', 'wordembedCluster', 'validation'))
+genre = st.sidebar.radio("What's your Method",('TextRank', 'disambiguationRank', 'disambiguationCluster', 'wordembedRank', 'wordembedCluster', 'BERTSum', 'validation'))
 if genre == 'TextRank':
     st.subheader("Sentence Ranking")
     col1, col2 = st.beta_columns([3, 1])
@@ -342,7 +342,12 @@ elif genre == 'wordembedCluster':
 #     summary = ' '.join([list_sentences[closest[idx]] for idx in ordering])
     summary = ' '.join([sentences[closest[idx]] for idx in ordering])
     st.write(summary)
-    
+
+elif genre == 'BERTsum':  
+    st.subheader("Hypothesis")
+    st.write("BERTSum")
+
+
 elif genre == 'validation':  
     st.subheader("Hypothesis")
     message1 = st.text_area("Enter your Text", height=200, value = pilihanDataset, key="kalimat1")
