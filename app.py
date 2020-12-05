@@ -161,7 +161,7 @@ colkedua.subheader("cleaned")
 colkedua.dataframe(cleaned_text)
 
 st.sidebar.subheader("Method Parameter")
-genre = st.sidebar.radio("What's your Method",('TextRank', 'disambiguationRank', 'disambiguationCluster', 'wordembedRank', 'wordembedCluster', 'BERTSum', 'validation'))
+genre = st.sidebar.radio("What's your Method",('TextRank', 'disambiguationRank', 'disambiguationCluster', 'wordembedRank', 'wordembedCluster', 'validation'))
 if genre == 'TextRank':
     st.subheader("Sentence Ranking")
     col1, col2 = st.beta_columns([3, 1])
@@ -342,18 +342,6 @@ elif genre == 'wordembedCluster':
 #     summary = ' '.join([list_sentences[closest[idx]] for idx in ordering])
     summary = ' '.join([sentences[closest[idx]] for idx in ordering])
     st.write(summary)
-
-elif genre == 'BERTSum':  
-#     from summarizer import Summarizer
-#     bert_model = Summarizer()
-#     body = sentences
-#     bert_summary = ''.join(bert_model(body, min_length=60))
-#     st.write(bert_summary)
-    from summarizer import TransformerSummarizer 
-    GPT2_model = TransformerSummarizer(transformer_type="GPT2",transformer_model_key="gpt2-medium")
-    body = sentences
-    full = ''.join(GPT2_model(body, min_length=60))
-    st.write(full)
 
 elif genre == 'validation':  
     st.subheader("Hypothesis")
