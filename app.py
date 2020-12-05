@@ -345,13 +345,7 @@ elif genre == 'wordembedCluster':
 
 elif genre == 'BERTSum':  
     st.subheader("Hypothesis")
-    from summarizer import Summarizer
-    body = sentences
-    model = Summarizer()
-    # result = model(body, ratio=0.2)  # Specified with ratio
-    result = model(body, num_sentences=3)  # Will return 3 sentences 
-    full = ''.join(result)
-    st.write(full)
+    st.write("BERTSUM")
 
 
 elif genre == 'validation':  
