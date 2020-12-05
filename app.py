@@ -343,7 +343,7 @@ elif genre == 'wordembedCluster':
     summary = ' '.join([sentences[closest[idx]] for idx in ordering])
     st.write(summary)
 
-elif genre == 'BERTsum':  
+elif genre == 'BERTSum':  
     st.subheader("Hypothesis")
     st.write("BERTSum")
 
