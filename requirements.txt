@@ -7,3 +7,4 @@ nltk
 pywsd
 wn==0.0.22
 xlrd
+bert-extractive-summarizer
