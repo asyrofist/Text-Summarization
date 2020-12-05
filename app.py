@@ -344,8 +344,12 @@ elif genre == 'wordembedCluster':
     st.write(summary)
 
 elif genre == 'BERTSum':  
-    st.write('BERT')
-
+    from summarizer import Summarizer,
+#     from summarizer import TransformerSummarizer 
+    bert_model = Summarizer()
+    body = sentences
+    bert_summary = ''.join(bert_model(body, min_length=60))
+    st.write(bert_summary)
 
 elif genre == 'validation':  
     st.subheader("Hypothesis")
